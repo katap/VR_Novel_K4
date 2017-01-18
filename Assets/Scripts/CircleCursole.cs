@@ -19,12 +19,15 @@ public class CircleCursole : MonoBehaviour {
     public GameObject animCommand;
     private CanvasGroup cGroup;
 
-    [HideInInspector]
+    [System.NonSerialized]
     public bool gageMax;
 
     private bool menuActive;
     private bool menuAlpha;
-    private bool one;
+    [System.NonSerialized]
+    public bool one;
+    [System.NonSerialized]
+    public string objectName;
     Animation_Command animCom;
 
     RaycastHit hit;
@@ -207,9 +210,21 @@ public class CircleCursole : MonoBehaviour {
             {
                 if (hit.collider.gameObject.name == ChoiceText[i].name)
                 {
-                    string objectName = hit.collider.gameObject.name;
+                    objectName = hit.collider.gameObject.name;
                     Debug.Log( objectName + ":" + ChoiceText[i].fontSize);
-                    animCom.k += 1;
+                    //animCom.k += 1;
+                    if (objectName == "ChoiceText1")
+                    {
+                        animCom.beforeswitch = animCom.choiceswitch;
+                        animCom.choiceswitch = animCom.nextNo1[animCom.k];
+                        animCom.k = animCom.nextNo1[animCom.k];
+                    }
+                    else if (objectName == "ChoiceText2")
+                    {
+                        animCom.beforeswitch = animCom.choiceswitch;
+                        animCom.choiceswitch = animCom.nextNo2[animCom.k];
+                        animCom.k = animCom.nextNo2[animCom.k];
+                    }
                 }
             }
         }

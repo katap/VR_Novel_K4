@@ -30,9 +30,13 @@ public class ChoiceTransition
 
     public int FontSize1;
 
+    public int nextChoiceNo1;
+
     public int canvasnum2;
 
     public int FontSize2;
+
+    public int nextChoiceNo2;
 }
 
 [Serializable]
@@ -61,6 +65,8 @@ public class SpawnPointTransition
     public int eventNum;
 
     public Vector3 spawnPoint;
+
+    public bool arrowActive;
 
 }
 

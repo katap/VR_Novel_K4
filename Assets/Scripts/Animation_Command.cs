@@ -30,13 +30,16 @@ public class Animation_Command : MonoBehaviour
     [Tooltip("アニメーションさせたい Character を入れてください。")]
     public GameObject[] Character;
 
+    [Tooltip("制御したい GuiArrow がある Hieralcy オブジェクトを入れてください。")]
+    public GameObject gArrow;
+
     #endregion
 
 
     #region GetTransition
 
-    //  TransitionBook習得用関数群
-    private int[] moveTransition;
+//  TransitionBook習得用関数群
+private int[] moveTransition;
     private int[] moveCanvas;
     private int[] moveChoiceNoSelect;
     private int[] choiceLength;
@@ -47,8 +50,12 @@ public class Animation_Command : MonoBehaviour
     private int[] cNo;
     private int[] canvasNum1;
     private int[] fontSize1;
+    [System.NonSerialized]
+    public int[] nextNo1;
     private int[] canvasNum2;
     private int[] fontSize2;
+    [System.NonSerialized]
+    public int[] nextNo2;
 
     //  TransitionChoiceText習得用関群
     [HideInInspector]
@@ -68,10 +75,18 @@ public class Animation_Command : MonoBehaviour
     //  TransitionSpawnPoint習得用関数群
     private int[] spawnEvent;
     private Vector3[] spawnPointVector3;
+    [System.NonSerialized]
+    public bool[] aActive;
 
 	//  TransitionSpawnChoicePoint習得用関数群
 	private int[] spawnChoicePointEvent;
     private Vector3[] spawnChoicePointVector3;
+
+    [System.NonSerialized]
+    public int choiceswitch;
+    [System.NonSerialized]
+    public int beforeswitch;
+    private CircleCursole cCursole;
 
     #endregion
 
@@ -170,6 +185,7 @@ public class Animation_Command : MonoBehaviour
     public void startMove()
     {
         TController = textControllerPlace.GetComponent<TextController>();
+        cCursole = GetComponent<CircleCursole>();
         //  最初に表示するキャンパスを格納
         CanvasTorpidity = getCanvas[0];
 
@@ -177,13 +193,15 @@ public class Animation_Command : MonoBehaviour
 
 		count = 0;
 
+        choiceswitch = 0;
+
         //  配列に値を入れる処理
         settBook();
         settChoice();
         setTchoiceText();
         setAnimBook();
         setSpawnPoint();
-		setSpawnChoicePoint ();
+		//setSpawnChoicePoint ();
         setAllCanvas();
         setGuiArrowActive();
 
@@ -196,6 +214,9 @@ public class Animation_Command : MonoBehaviour
         }
         //  選択画面を何回連続で表示するか、値を習得
         BeforeLenth = choiceLength[j];
+
+        //setBookprocessing();
+
     }
 
 
@@ -297,7 +318,7 @@ public class Animation_Command : MonoBehaviour
         TController._uiText = getText[moveCanvas[j]];
 
         //  テキストのフォントサイズを変更する
-        getText[moveCanvas[j]].fontSize = fontSise[moveCanvas[j]];
+        getText[moveCanvas[j]].fontSize = fontSise[j];
 
         //  テキストを一文字ずつ表示するか
         if (noDelay[j])
@@ -321,6 +342,57 @@ public class Animation_Command : MonoBehaviour
      */
     public void choiceNoSelectController()
     {
+        
+        if (choiceswitch != 999)
+        {
+            choiceCanvasControll();
+        }
+        else
+        {
+            //  tChoiceの終了処理
+            textControllerPlace.SetActive(true);
+            getChoiceCanvas[canvasNum1[beforeswitch]].SetActive(false);
+            getChoiceCanvas[canvasNum2[beforeswitch]].SetActive(false);
+
+            //  tBookの処理
+            setBookprocessing();
+
+            BeforeLenth += choiceLength[j];
+        }
+        
+        #region iranai
+        /*
+        switch (choiceswitch) {
+            case 0:
+                choiceCanvasControll();
+                break;
+            case 1:
+                choiceCanvasControll();
+                break;
+            case 2:
+                choiceCanvasControll();
+                break;
+            case 3:
+                choiceCanvasControll();
+                break;
+            case 4:
+                choiceCanvasControll();
+                break;
+            case 999:
+                //  tChoiceの終了処理
+                textControllerPlace.SetActive(true);
+                getChoiceCanvas[canvasNum1[k - 1]].SetActive(false);
+                getChoiceCanvas[canvasNum2[k - 1]].SetActive(false);
+
+                //  tBookの処理
+                setBookprocessing();
+
+                BeforeLenth += choiceLength[j];
+                break;
+                
+        }
+        */
+        /*
         //  チョイスセレクトがオンのときの処理
         if (k < BeforeLenth)
         {
@@ -356,6 +428,34 @@ public class Animation_Command : MonoBehaviour
             setBookprocessing();
 
             BeforeLenth += choiceLength[j];
+        }
+        // */
+
+        #endregion
+    }
+
+
+    public void choiceCanvasControll() {
+        // クリックしてもキャンバスの文字送りが行われないようにする。
+        textControllerPlace.SetActive(false);
+        //  tChoiceの処理
+        if (k != 0)
+        {
+            getChoiceCanvas[canvasNum1[k - 1]].SetActive(false);
+            getChoiceCanvas[canvasNum2[k - 1]].SetActive(false);
+        }
+        getChoiceText[canvasNum1[k]].fontSize = fontSize1[k];
+        getChoiceText[canvasNum2[k]].fontSize = fontSize2[k];
+        getChoiceCanvas[canvasNum1[k]].SetActive(true);
+        getChoiceCanvas[canvasNum2[k]].SetActive(true);
+        nowC = canvasNum1[k] + getCanvas.Length;
+        getChoiceText[canvasNum1[k]].text = choiceText[cNo[k]];
+        getChoiceText[canvasNum2[k]].text = choiceText[cNo[k]];
+        //  moveChoiceNoSelectが2なら、キャンバスと選択肢を同時に表示する
+        if (moveChoiceNoSelect[j] != 2)
+        {
+            getCanvas[moveCanvas[j]].SetActive(false);
+            CanvasTorpidity.SetActive(false);
         }
     }
 
@@ -537,8 +637,10 @@ public class Animation_Command : MonoBehaviour
         sysArray.Resize(ref cNo, tcLen);
         sysArray.Resize(ref canvasNum1, tcLen);
         sysArray.Resize(ref fontSize1, tcLen);
+        sysArray.Resize(ref nextNo1, tcLen);
         sysArray.Resize(ref canvasNum2, tcLen);
         sysArray.Resize(ref fontSize2, tcLen);
+        sysArray.Resize(ref nextNo2, tcLen);
 
         for (int i = 0; i < tcLen; i++)
         {
@@ -546,8 +648,10 @@ public class Animation_Command : MonoBehaviour
             cNo[i] = tChoice.choiceData[i].choiceNo;
             canvasNum1[i] = tChoice.choiceData[i].canvasNum1;
             fontSize1[i] = tChoice.choiceData[i].FontSize1;
+            nextNo1[i] = tChoice.choiceData[i].nextChoiceNo1;
             canvasNum2[i] = tChoice.choiceData[i].canvasnum2;
             fontSize2[i] = tChoice.choiceData[i].FontSize2;
+            nextNo2[i] = tChoice.choiceData[i].nextChoiceNo2;
         }
     }
 
@@ -622,12 +726,14 @@ public class Animation_Command : MonoBehaviour
 
         sysArray.Resize(ref spawnEvent, spLen + 1);
         sysArray.Resize(ref spawnPointVector3, spLen);
+        sysArray.Resize(ref aActive, spLen);
 
         for (int i = 0; i < spLen; i++)
         {
             tSpawnPoint.spawnPointData[i].dataLength = i;
             spawnEvent[i] = tSpawnPoint.spawnPointData[i].eventNum;
             spawnPointVector3[i] = tSpawnPoint.spawnPointData[i].spawnPoint;
+            aActive[i] = tSpawnPoint.spawnPointData[i].arrowActive;
         }
     }
 
@@ -637,6 +743,7 @@ public class Animation_Command : MonoBehaviour
      *  transitionPlace 下の transitionSpawnChoicePointの値を習得する。
      * </summary>
      */
+     /*
     public void setSpawnChoicePoint()
 	{
 		tSpawnChoicePoint = transitionPlace.GetComponent<TransitionSpawnChoicePoint>();
@@ -653,7 +760,7 @@ public class Animation_Command : MonoBehaviour
 			spawnChoicePointVector3[i] = tSpawnChoicePoint.spawnChoicePointData[i].spawnChoicePoint;
 		}
 	}
-
+    */
     #endregion
 
 

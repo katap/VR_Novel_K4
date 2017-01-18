@@ -2770,7 +2770,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.24648507, g: 0.28232956, b: 0.34567434, a: 1}
+  m_IndirectSpecularColor: {r: 0.18053578, g: 0.22601803, b: 0.30718797, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -2855,8 +2855,8 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0, y: 507}
-  m_SizeDelta: {x: 0, y: 400}
+  m_AnchoredPosition: {x: 0, y: 470}
+  m_SizeDelta: {x: 0, y: 390}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &61307914
 MonoBehaviour:
@@ -3984,7 +3984,6 @@ GameObject:
   - 114: {fileID: 387046577}
   - 114: {fileID: 387046576}
   - 114: {fileID: 387046581}
-  - 114: {fileID: 387046582}
   m_Layer: 0
   m_Name: GameTransitionController
   m_TagString: Untagged
@@ -4040,39 +4039,963 @@ MonoBehaviour:
   - debugNo: 0
     choiceNo: 0
     canvasNum1: 0
-    FontSize1: 10
+    FontSize1: 25
+    nextChoiceNo1: 1
     canvasnum2: 1
-    FontSize2: 50
+    FontSize2: 55
+    nextChoiceNo2: 2
   - debugNo: 1
     choiceNo: 0
     canvasNum1: 0
-    FontSize1: 20
+    FontSize1: 15
+    nextChoiceNo1: 3
     canvasnum2: 1
-    FontSize2: 30
+    FontSize2: 35
+    nextChoiceNo2: 4
   - debugNo: 2
     choiceNo: 0
     canvasNum1: 0
-    FontSize1: 30
+    FontSize1: 45
+    nextChoiceNo1: 5
     canvasnum2: 1
-    FontSize2: 40
+    FontSize2: 65
+    nextChoiceNo2: 6
   - debugNo: 3
     choiceNo: 0
     canvasNum1: 0
+    FontSize1: 10
+    nextChoiceNo1: 7
+    canvasnum2: 1
+    FontSize2: 20
+    nextChoiceNo2: 8
+  - debugNo: 4
+    choiceNo: 0
+    canvasNum1: 0
+    FontSize1: 30
+    nextChoiceNo1: 8
+    canvasnum2: 1
+    FontSize2: 40
+    nextChoiceNo2: 9
+  - debugNo: 5
+    choiceNo: 0
+    canvasNum1: 0
     FontSize1: 40
+    nextChoiceNo1: 10
+    canvasnum2: 1
+    FontSize2: 50
+    nextChoiceNo2: 11
+  - debugNo: 6
+    choiceNo: 0
+    canvasNum1: 0
+    FontSize1: 60
+    nextChoiceNo1: 12
+    canvasnum2: 1
+    FontSize2: 70
+    nextChoiceNo2: 13
+  - debugNo: 7
+    choiceNo: 0
+    canvasNum1: 0
+    FontSize1: 5
+    nextChoiceNo1: 14
+    canvasnum2: 1
+    FontSize2: 15
+    nextChoiceNo2: 15
+  - debugNo: 8
+    choiceNo: 0
+    canvasNum1: 0
+    FontSize1: 15
+    nextChoiceNo1: 15
+    canvasnum2: 1
+    FontSize2: 25
+    nextChoiceNo2: 16
+  - debugNo: 9
+    choiceNo: 0
+    canvasNum1: 0
+    FontSize1: 25
+    nextChoiceNo1: 16
+    canvasnum2: 1
+    FontSize2: 35
+    nextChoiceNo2: 17
+  - debugNo: 10
+    choiceNo: 0
+    canvasNum1: 0
+    FontSize1: 35
+    nextChoiceNo1: 17
+    canvasnum2: 1
+    FontSize2: 45
+    nextChoiceNo2: 18
+  - debugNo: 11
+    choiceNo: 0
+    canvasNum1: 0
+    FontSize1: 45
+    nextChoiceNo1: 18
+    canvasnum2: 1
+    FontSize2: 55
+    nextChoiceNo2: 19
+  - debugNo: 12
+    choiceNo: 0
+    canvasNum1: 0
+    FontSize1: 55
+    nextChoiceNo1: 19
+    canvasnum2: 1
+    FontSize2: 65
+    nextChoiceNo2: 20
+  - debugNo: 13
+    choiceNo: 0
+    canvasNum1: 0
+    FontSize1: 65
+    nextChoiceNo1: 20
+    canvasnum2: 1
+    FontSize2: 75
+    nextChoiceNo2: 21
+  - debugNo: 14
+    choiceNo: 0
+    canvasNum1: 0
+    FontSize1: 3
+    nextChoiceNo1: 22
     canvasnum2: 1
     FontSize2: 10
-  - debugNo: 4
+    nextChoiceNo2: 23
+  - debugNo: 15
+    choiceNo: 0
+    canvasNum1: 0
+    FontSize1: 10
+    nextChoiceNo1: 23
+    canvasnum2: 1
+    FontSize2: 20
+    nextChoiceNo2: 24
+  - debugNo: 16
+    choiceNo: 0
+    canvasNum1: 0
+    FontSize1: 20
+    nextChoiceNo1: 24
+    canvasnum2: 1
+    FontSize2: 30
+    nextChoiceNo2: 25
+  - debugNo: 17
+    choiceNo: 0
+    canvasNum1: 0
+    FontSize1: 30
+    nextChoiceNo1: 25
+    canvasnum2: 1
+    FontSize2: 40
+    nextChoiceNo2: 26
+  - debugNo: 18
+    choiceNo: 0
+    canvasNum1: 0
+    FontSize1: 40
+    nextChoiceNo1: 26
+    canvasnum2: 1
+    FontSize2: 50
+    nextChoiceNo2: 27
+  - debugNo: 19
     choiceNo: 0
     canvasNum1: 0
     FontSize1: 50
+    nextChoiceNo1: 27
+    canvasnum2: 1
+    FontSize2: 60
+    nextChoiceNo2: 28
+  - debugNo: 20
+    choiceNo: 0
+    canvasNum1: 0
+    FontSize1: 60
+    nextChoiceNo1: 28
+    canvasnum2: 1
+    FontSize2: 70
+    nextChoiceNo2: 29
+  - debugNo: 21
+    choiceNo: 0
+    canvasNum1: 0
+    FontSize1: 70
+    nextChoiceNo1: 29
+    canvasnum2: 1
+    FontSize2: 80
+    nextChoiceNo2: 30
+  - debugNo: 22
+    choiceNo: 0
+    canvasNum1: 0
+    FontSize1: 3
+    nextChoiceNo1: 31
+    canvasnum2: 1
+    FontSize2: 7
+    nextChoiceNo2: 32
+  - debugNo: 23
+    choiceNo: 0
+    canvasNum1: 0
+    FontSize1: 8
+    nextChoiceNo1: 33
+    canvasnum2: 1
+    FontSize2: 12
+    nextChoiceNo2: 34
+  - debugNo: 24
+    choiceNo: 0
+    canvasNum1: 0
+    FontSize1: 18
+    nextChoiceNo1: 35
+    canvasnum2: 1
+    FontSize2: 22
+    nextChoiceNo2: 36
+  - debugNo: 25
+    choiceNo: 0
+    canvasNum1: 0
+    FontSize1: 28
+    nextChoiceNo1: 37
+    canvasnum2: 1
+    FontSize2: 32
+    nextChoiceNo2: 38
+  - debugNo: 26
+    choiceNo: 0
+    canvasNum1: 0
+    FontSize1: 38
+    nextChoiceNo1: 39
+    canvasnum2: 1
+    FontSize2: 42
+    nextChoiceNo2: 40
+  - debugNo: 27
+    choiceNo: 0
+    canvasNum1: 0
+    FontSize1: 48
+    nextChoiceNo1: 41
+    canvasnum2: 1
+    FontSize2: 52
+    nextChoiceNo2: 42
+  - debugNo: 28
+    choiceNo: 0
+    canvasNum1: 0
+    FontSize1: 58
+    nextChoiceNo1: 43
+    canvasnum2: 1
+    FontSize2: 62
+    nextChoiceNo2: 44
+  - debugNo: 29
+    choiceNo: 0
+    canvasNum1: 0
+    FontSize1: 68
+    nextChoiceNo1: 45
+    canvasnum2: 1
+    FontSize2: 72
+    nextChoiceNo2: 46
+  - debugNo: 30
+    choiceNo: 0
+    canvasNum1: 0
+    FontSize1: 78
+    nextChoiceNo1: 47
+    canvasnum2: 1
+    FontSize2: 82
+    nextChoiceNo2: 48
+  - debugNo: 31
+    choiceNo: 0
+    canvasNum1: 0
+    FontSize1: 2
+    nextChoiceNo1: 49
+    canvasnum2: 1
+    FontSize2: 4
+    nextChoiceNo2: 50
+  - debugNo: 32
+    choiceNo: 0
+    canvasNum1: 0
+    FontSize1: 6
+    nextChoiceNo1: 51
+    canvasnum2: 1
+    FontSize2: 8
+    nextChoiceNo2: 52
+  - debugNo: 33
+    choiceNo: 0
+    canvasNum1: 0
+    FontSize1: 7
+    nextChoiceNo1: 56
+    canvasnum2: 1
+    FontSize2: 9
+    nextChoiceNo2: 57
+  - debugNo: 34
+    choiceNo: 0
+    canvasNum1: 0
+    FontSize1: 11
+    nextChoiceNo1: 57
+    canvasnum2: 1
+    FontSize2: 13
+    nextChoiceNo2: 58
+  - debugNo: 35
+    choiceNo: 0
+    canvasNum1: 0
+    FontSize1: 17
+    nextChoiceNo1: 59
+    canvasnum2: 1
+    FontSize2: 19
+    nextChoiceNo2: 60
+  - debugNo: 36
+    choiceNo: 0
+    canvasNum1: 0
+    FontSize1: 21
+    nextChoiceNo1: 60
+    canvasnum2: 1
+    FontSize2: 23
+    nextChoiceNo2: 61
+  - debugNo: 37
+    choiceNo: 0
+    canvasNum1: 0
+    FontSize1: 27
+    nextChoiceNo1: 62
+    canvasnum2: 1
+    FontSize2: 29
+    nextChoiceNo2: 63
+  - debugNo: 38
+    choiceNo: 0
+    canvasNum1: 0
+    FontSize1: 31
+    nextChoiceNo1: 63
+    canvasnum2: 1
+    FontSize2: 33
+    nextChoiceNo2: 64
+  - debugNo: 39
+    choiceNo: 0
+    canvasNum1: 0
+    FontSize1: 37
+    nextChoiceNo1: 65
+    canvasnum2: 1
+    FontSize2: 39
+    nextChoiceNo2: 66
+  - debugNo: 40
+    choiceNo: 0
+    canvasNum1: 0
+    FontSize1: 41
+    nextChoiceNo1: 66
+    canvasnum2: 1
+    FontSize2: 43
+    nextChoiceNo2: 67
+  - debugNo: 41
+    choiceNo: 0
+    canvasNum1: 0
+    FontSize1: 47
+    nextChoiceNo1: 68
+    canvasnum2: 1
+    FontSize2: 49
+    nextChoiceNo2: 69
+  - debugNo: 42
+    choiceNo: 0
+    canvasNum1: 0
+    FontSize1: 51
+    nextChoiceNo1: 69
+    canvasnum2: 1
+    FontSize2: 53
+    nextChoiceNo2: 70
+  - debugNo: 43
+    choiceNo: 0
+    canvasNum1: 0
+    FontSize1: 57
+    nextChoiceNo1: 71
+    canvasnum2: 1
+    FontSize2: 59
+    nextChoiceNo2: 72
+  - debugNo: 44
+    choiceNo: 0
+    canvasNum1: 0
+    FontSize1: 61
+    nextChoiceNo1: 72
+    canvasnum2: 1
+    FontSize2: 63
+    nextChoiceNo2: 73
+  - debugNo: 45
+    choiceNo: 0
+    canvasNum1: 0
+    FontSize1: 67
+    nextChoiceNo1: 74
+    canvasnum2: 1
+    FontSize2: 69
+    nextChoiceNo2: 75
+  - debugNo: 46
+    choiceNo: 0
+    canvasNum1: 0
+    FontSize1: 71
+    nextChoiceNo1: 75
+    canvasnum2: 1
+    FontSize2: 73
+    nextChoiceNo2: 76
+  - debugNo: 47
+    choiceNo: 0
+    canvasNum1: 0
+    FontSize1: 77
+    nextChoiceNo1: 77
+    canvasnum2: 1
+    FontSize2: 79
+    nextChoiceNo2: 78
+  - debugNo: 48
+    choiceNo: 0
+    canvasNum1: 0
+    FontSize1: 81
+    nextChoiceNo1: 78
+    canvasnum2: 1
+    FontSize2: 83
+    nextChoiceNo2: 79
+  - debugNo: 49
+    choiceNo: 0
+    canvasNum1: 0
+    FontSize1: 1
+    nextChoiceNo1: 999
+    canvasnum2: 1
+    FontSize2: 2
+    nextChoiceNo2: 53
+  - debugNo: 50
+    choiceNo: 0
+    canvasNum1: 0
+    FontSize1: 4
+    nextChoiceNo1: 999
+    canvasnum2: 1
+    FontSize2: 5
+    nextChoiceNo2: 54
+  - debugNo: 51
+    choiceNo: 0
+    canvasNum1: 0
+    FontSize1: 6
+    nextChoiceNo1: 50
+    canvasnum2: 1
+    FontSize2: 7
+    nextChoiceNo2: 999
+  - debugNo: 52
+    choiceNo: 0
+    canvasNum1: 0
+    FontSize1: 7
+    nextChoiceNo1: 999
+    canvasnum2: 1
+    FontSize2: 8
+    nextChoiceNo2: 55
+  - debugNo: 53
+    choiceNo: 0
+    canvasNum1: 0
+    FontSize1: 2
+    nextChoiceNo1: 999
+    canvasnum2: 1
+    FontSize2: 3
+    nextChoiceNo2: 999
+  - debugNo: 54
+    choiceNo: 0
+    canvasNum1: 0
+    FontSize1: 5
+    nextChoiceNo1: 999
+    canvasnum2: 1
+    FontSize2: 6
+    nextChoiceNo2: 999
+  - debugNo: 55
+    choiceNo: 0
+    canvasNum1: 0
+    FontSize1: 8
+    nextChoiceNo1: 999
+    canvasnum2: 1
+    FontSize2: 9
+    nextChoiceNo2: 999
+  - debugNo: 56
+    choiceNo: 0
+    canvasNum1: 0
+    FontSize1: 6
+    nextChoiceNo1: 80
+    canvasnum2: 1
+    FontSize2: 7
+    nextChoiceNo2: 81
+  - debugNo: 57
+    choiceNo: 0
+    canvasNum1: 0
+    FontSize1: 9
+    nextChoiceNo1: 81
+    canvasnum2: 1
+    FontSize2: 10
+    nextChoiceNo2: 82
+  - debugNo: 58
+    choiceNo: 0
+    canvasNum1: 0
+    FontSize1: 13
+    nextChoiceNo1: 83
+    canvasnum2: 1
+    FontSize2: 14
+    nextChoiceNo2: 84
+  - debugNo: 59
+    choiceNo: 0
+    canvasNum1: 0
+    FontSize1: 16
+    nextChoiceNo1: 85
+    canvasnum2: 1
+    FontSize2: 17
+    nextChoiceNo2: 86
+  - debugNo: 60
+    choiceNo: 0
+    canvasNum1: 0
+    FontSize1: 18
+    nextChoiceNo1: 86
+    canvasnum2: 1
+    FontSize2: 20
+    nextChoiceNo2: 87
+  - debugNo: 61
+    choiceNo: 0
+    canvasNum1: 0
+    FontSize1: 23
+    nextChoiceNo1: 88
+    canvasnum2: 1
+    FontSize2: 24
+    nextChoiceNo2: 89
+  - debugNo: 62
+    choiceNo: 0
+    canvasNum1: 0
+    FontSize1: 26
+    nextChoiceNo1: 90
+    canvasnum2: 1
+    FontSize2: 27
+    nextChoiceNo2: 91
+  - debugNo: 63
+    choiceNo: 0
+    canvasNum1: 0
+    FontSize1: 29
+    nextChoiceNo1: 91
+    canvasnum2: 1
+    FontSize2: 30
+    nextChoiceNo2: 92
+  - debugNo: 64
+    choiceNo: 0
+    canvasNum1: 0
+    FontSize1: 33
+    nextChoiceNo1: 93
+    canvasnum2: 1
+    FontSize2: 34
+    nextChoiceNo2: 94
+  - debugNo: 65
+    choiceNo: 0
+    canvasNum1: 0
+    FontSize1: 36
+    nextChoiceNo1: 95
+    canvasnum2: 1
+    FontSize2: 37
+    nextChoiceNo2: 96
+  - debugNo: 66
+    choiceNo: 0
+    canvasNum1: 0
+    FontSize1: 38
+    nextChoiceNo1: 96
+    canvasnum2: 1
+    FontSize2: 40
+    nextChoiceNo2: 97
+  - debugNo: 67
+    choiceNo: 0
+    canvasNum1: 0
+    FontSize1: 43
+    nextChoiceNo1: 98
+    canvasnum2: 1
+    FontSize2: 44
+    nextChoiceNo2: 99
+  - debugNo: 68
+    choiceNo: 0
+    canvasNum1: 0
+    FontSize1: 46
+    nextChoiceNo1: 100
+    canvasnum2: 1
+    FontSize2: 47
+    nextChoiceNo2: 101
+  - debugNo: 69
+    choiceNo: 0
+    canvasNum1: 0
+    FontSize1: 48
+    nextChoiceNo1: 101
     canvasnum2: 1
     FontSize2: 50
-  - debugNo: 4
+    nextChoiceNo2: 102
+  - debugNo: 70
+    choiceNo: 0
+    canvasNum1: 0
+    FontSize1: 53
+    nextChoiceNo1: 103
+    canvasnum2: 1
+    FontSize2: 54
+    nextChoiceNo2: 104
+  - debugNo: 71
+    choiceNo: 0
+    canvasNum1: 0
+    FontSize1: 56
+    nextChoiceNo1: 105
+    canvasnum2: 1
+    FontSize2: 57
+    nextChoiceNo2: 106
+  - debugNo: 72
+    choiceNo: 0
+    canvasNum1: 0
+    FontSize1: 58
+    nextChoiceNo1: 106
+    canvasnum2: 1
+    FontSize2: 60
+    nextChoiceNo2: 107
+  - debugNo: 73
+    choiceNo: 0
+    canvasNum1: 0
+    FontSize1: 63
+    nextChoiceNo1: 108
+    canvasnum2: 1
+    FontSize2: 64
+    nextChoiceNo2: 109
+  - debugNo: 74
+    choiceNo: 0
+    canvasNum1: 0
+    FontSize1: 66
+    nextChoiceNo1: 110
+    canvasnum2: 1
+    FontSize2: 67
+    nextChoiceNo2: 111
+  - debugNo: 75
+    choiceNo: 0
+    canvasNum1: 0
+    FontSize1: 68
+    nextChoiceNo1: 111
+    canvasnum2: 1
+    FontSize2: 70
+    nextChoiceNo2: 112
+  - debugNo: 76
+    choiceNo: 0
+    canvasNum1: 0
+    FontSize1: 73
+    nextChoiceNo1: 113
+    canvasnum2: 1
+    FontSize2: 74
+    nextChoiceNo2: 114
+  - debugNo: 77
+    choiceNo: 0
+    canvasNum1: 0
+    FontSize1: 76
+    nextChoiceNo1: 115
+    canvasnum2: 1
+    FontSize2: 77
+    nextChoiceNo2: 116
+  - debugNo: 78
+    choiceNo: 0
+    canvasNum1: 0
+    FontSize1: 78
+    nextChoiceNo1: 116
+    canvasnum2: 1
+    FontSize2: 80
+    nextChoiceNo2: 117
+  - debugNo: 79
+    choiceNo: 0
+    canvasNum1: 0
+    FontSize1: 83
+    nextChoiceNo1: 118
+    canvasnum2: 1
+    FontSize2: 84
+    nextChoiceNo2: 119
+  - debugNo: 80
+    choiceNo: 0
+    canvasNum1: 0
+    FontSize1: 6
+    nextChoiceNo1: 999
+    canvasnum2: 1
+    FontSize2: 7
+    nextChoiceNo2: 999
+  - debugNo: 81
+    choiceNo: 0
+    canvasNum1: 0
+    FontSize1: 8
+    nextChoiceNo1: 999
+    canvasnum2: 1
+    FontSize2: 9
+    nextChoiceNo2: 999
+  - debugNo: 82
+    choiceNo: 0
+    canvasNum1: 0
+    FontSize1: 10
+    nextChoiceNo1: 999
+    canvasnum2: 1
+    FontSize2: 11
+    nextChoiceNo2: 999
+  - debugNo: 83
+    choiceNo: 0
+    canvasNum1: 0
+    FontSize1: 12
+    nextChoiceNo1: 999
+    canvasnum2: 1
+    FontSize2: 13
+    nextChoiceNo2: 999
+  - debugNo: 84
+    choiceNo: 0
+    canvasNum1: 0
+    FontSize1: 14
+    nextChoiceNo1: 999
+    canvasnum2: 1
+    FontSize2: 15
+    nextChoiceNo2: 999
+  - debugNo: 85
+    choiceNo: 0
+    canvasNum1: 0
+    FontSize1: 16
+    nextChoiceNo1: 999
+    canvasnum2: 1
+    FontSize2: 17
+    nextChoiceNo2: 999
+  - debugNo: 86
+    choiceNo: 0
+    canvasNum1: 0
+    FontSize1: 18
+    nextChoiceNo1: 999
+    canvasnum2: 1
+    FontSize2: 19
+    nextChoiceNo2: 999
+  - debugNo: 87
+    choiceNo: 0
+    canvasNum1: 0
+    FontSize1: 20
+    nextChoiceNo1: 999
+    canvasnum2: 1
+    FontSize2: 21
+    nextChoiceNo2: 999
+  - debugNo: 88
+    choiceNo: 0
+    canvasNum1: 0
+    FontSize1: 22
+    nextChoiceNo1: 999
+    canvasnum2: 1
+    FontSize2: 23
+    nextChoiceNo2: 999
+  - debugNo: 89
+    choiceNo: 0
+    canvasNum1: 0
+    FontSize1: 24
+    nextChoiceNo1: 999
+    canvasnum2: 1
+    FontSize2: 25
+    nextChoiceNo2: 999
+  - debugNo: 90
+    choiceNo: 0
+    canvasNum1: 0
+    FontSize1: 26
+    nextChoiceNo1: 999
+    canvasnum2: 1
+    FontSize2: 27
+    nextChoiceNo2: 999
+  - debugNo: 91
+    choiceNo: 0
+    canvasNum1: 0
+    FontSize1: 28
+    nextChoiceNo1: 999
+    canvasnum2: 1
+    FontSize2: 29
+    nextChoiceNo2: 999
+  - debugNo: 92
+    choiceNo: 0
+    canvasNum1: 0
+    FontSize1: 30
+    nextChoiceNo1: 999
+    canvasnum2: 1
+    FontSize2: 31
+    nextChoiceNo2: 999
+  - debugNo: 93
+    choiceNo: 0
+    canvasNum1: 0
+    FontSize1: 32
+    nextChoiceNo1: 999
+    canvasnum2: 1
+    FontSize2: 33
+    nextChoiceNo2: 999
+  - debugNo: 94
+    choiceNo: 0
+    canvasNum1: 0
+    FontSize1: 34
+    nextChoiceNo1: 999
+    canvasnum2: 1
+    FontSize2: 35
+    nextChoiceNo2: 999
+  - debugNo: 95
+    choiceNo: 0
+    canvasNum1: 0
+    FontSize1: 36
+    nextChoiceNo1: 999
+    canvasnum2: 1
+    FontSize2: 37
+    nextChoiceNo2: 999
+  - debugNo: 96
+    choiceNo: 0
+    canvasNum1: 0
+    FontSize1: 38
+    nextChoiceNo1: 999
+    canvasnum2: 1
+    FontSize2: 39
+    nextChoiceNo2: 999
+  - debugNo: 97
+    choiceNo: 0
+    canvasNum1: 0
+    FontSize1: 40
+    nextChoiceNo1: 999
+    canvasnum2: 1
+    FontSize2: 41
+    nextChoiceNo2: 999
+  - debugNo: 98
+    choiceNo: 0
+    canvasNum1: 0
+    FontSize1: 42
+    nextChoiceNo1: 999
+    canvasnum2: 1
+    FontSize2: 43
+    nextChoiceNo2: 999
+  - debugNo: 99
+    choiceNo: 0
+    canvasNum1: 0
+    FontSize1: 44
+    nextChoiceNo1: 999
+    canvasnum2: 1
+    FontSize2: 45
+    nextChoiceNo2: 999
+  - debugNo: 100
+    choiceNo: 0
+    canvasNum1: 0
+    FontSize1: 46
+    nextChoiceNo1: 999
+    canvasnum2: 1
+    FontSize2: 47
+    nextChoiceNo2: 999
+  - debugNo: 101
+    choiceNo: 0
+    canvasNum1: 0
+    FontSize1: 48
+    nextChoiceNo1: 999
+    canvasnum2: 1
+    FontSize2: 49
+    nextChoiceNo2: 999
+  - debugNo: 102
     choiceNo: 0
     canvasNum1: 0
     FontSize1: 50
+    nextChoiceNo1: 999
     canvasnum2: 1
-    FontSize2: 50
+    FontSize2: 51
+    nextChoiceNo2: 999
+  - debugNo: 103
+    choiceNo: 0
+    canvasNum1: 0
+    FontSize1: 52
+    nextChoiceNo1: 999
+    canvasnum2: 1
+    FontSize2: 53
+    nextChoiceNo2: 999
+  - debugNo: 104
+    choiceNo: 0
+    canvasNum1: 0
+    FontSize1: 54
+    nextChoiceNo1: 999
+    canvasnum2: 1
+    FontSize2: 55
+    nextChoiceNo2: 999
+  - debugNo: 105
+    choiceNo: 0
+    canvasNum1: 0
+    FontSize1: 56
+    nextChoiceNo1: 999
+    canvasnum2: 1
+    FontSize2: 57
+    nextChoiceNo2: 999
+  - debugNo: 106
+    choiceNo: 0
+    canvasNum1: 0
+    FontSize1: 58
+    nextChoiceNo1: 999
+    canvasnum2: 1
+    FontSize2: 59
+    nextChoiceNo2: 999
+  - debugNo: 107
+    choiceNo: 0
+    canvasNum1: 0
+    FontSize1: 60
+    nextChoiceNo1: 999
+    canvasnum2: 1
+    FontSize2: 61
+    nextChoiceNo2: 999
+  - debugNo: 108
+    choiceNo: 0
+    canvasNum1: 0
+    FontSize1: 62
+    nextChoiceNo1: 999
+    canvasnum2: 1
+    FontSize2: 63
+    nextChoiceNo2: 999
+  - debugNo: 109
+    choiceNo: 0
+    canvasNum1: 0
+    FontSize1: 64
+    nextChoiceNo1: 999
+    canvasnum2: 1
+    FontSize2: 65
+    nextChoiceNo2: 999
+  - debugNo: 110
+    choiceNo: 0
+    canvasNum1: 0
+    FontSize1: 66
+    nextChoiceNo1: 999
+    canvasnum2: 1
+    FontSize2: 67
+    nextChoiceNo2: 999
+  - debugNo: 111
+    choiceNo: 0
+    canvasNum1: 0
+    FontSize1: 68
+    nextChoiceNo1: 999
+    canvasnum2: 1
+    FontSize2: 69
+    nextChoiceNo2: 999
+  - debugNo: 112
+    choiceNo: 0
+    canvasNum1: 0
+    FontSize1: 70
+    nextChoiceNo1: 999
+    canvasnum2: 1
+    FontSize2: 71
+    nextChoiceNo2: 999
+  - debugNo: 113
+    choiceNo: 0
+    canvasNum1: 0
+    FontSize1: 72
+    nextChoiceNo1: 999
+    canvasnum2: 1
+    FontSize2: 73
+    nextChoiceNo2: 999
+  - debugNo: 114
+    choiceNo: 0
+    canvasNum1: 0
+    FontSize1: 74
+    nextChoiceNo1: 999
+    canvasnum2: 1
+    FontSize2: 75
+    nextChoiceNo2: 999
+  - debugNo: 115
+    choiceNo: 0
+    canvasNum1: 0
+    FontSize1: 76
+    nextChoiceNo1: 999
+    canvasnum2: 1
+    FontSize2: 77
+    nextChoiceNo2: 999
+  - debugNo: 116
+    choiceNo: 0
+    canvasNum1: 0
+    FontSize1: 78
+    nextChoiceNo1: 999
+    canvasnum2: 1
+    FontSize2: 79
+    nextChoiceNo2: 999
+  - debugNo: 117
+    choiceNo: 0
+    canvasNum1: 0
+    FontSize1: 80
+    nextChoiceNo1: 999
+    canvasnum2: 1
+    FontSize2: 81
+    nextChoiceNo2: 999
+  - debugNo: 118
+    choiceNo: 0
+    canvasNum1: 0
+    FontSize1: 82
+    nextChoiceNo1: 999
+    canvasnum2: 1
+    FontSize2: 83
+    nextChoiceNo2: 999
+  - debugNo: 119
+    choiceNo: 0
+    canvasNum1: 0
+    FontSize1: 84
+    nextChoiceNo1: 999
+    canvasnum2: 1
+    FontSize2: 85
+    nextChoiceNo2: 999
 --- !u!114 &387046579
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4085,39 +5008,46 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data:
-  - transitionNum: 4
+  - transitionNum: 0
+    canvasNum: 2
+    choiceNoSelect: 0
+    choiceLength: 0
+    debugChoiceLength: 0
+    fontSize: 50
+    delay: 1
+  - transitionNum: 36
     canvasNum: 2
     choiceNoSelect: 1
-    choiceLength: 5
-    debugChoiceLength: 4
+    choiceLength: 0
+    debugChoiceLength: 0
     fontSize: 50
     delay: 1
   - transitionNum: 46
     canvasNum: 0
     choiceNoSelect: 0
-    choiceLength: 2
+    choiceLength: 0
     debugChoiceLength: 0
     fontSize: 70
     delay: 1
   - transitionNum: 52
-    canvasNum: 1
-    choiceNoSelect: 0
-    choiceLength: 2
-    debugChoiceLength: 2
-    fontSize: 38
-    delay: 1
-  - transitionNum: 56
     canvasNum: 3
     choiceNoSelect: 0
-    choiceLength: 1
-    debugChoiceLength: 3
-    fontSize: 38
+    choiceLength: 0
+    debugChoiceLength: 0
+    fontSize: 20
+    delay: 1
+  - transitionNum: 56
+    canvasNum: 1
+    choiceNoSelect: 0
+    choiceLength: 0
+    debugChoiceLength: 0
+    fontSize: 20
     delay: 1
   - transitionNum: 60
     canvasNum: 2
     choiceNoSelect: 0
-    choiceLength: 1
-    debugChoiceLength: 4
+    choiceLength: 0
+    debugChoiceLength: 0
     fontSize: 50
     delay: 1
 --- !u!4 &387046580
@@ -4146,62 +5076,57 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnPointData:
   - dataLength: 0
-    eventNum: 0
+    eventNum: 2
     spawnPoint: {x: -5, y: 5, z: 5}
+    arrowActive: 0
   - dataLength: 0
-    eventNum: 0
+    eventNum: 3
     spawnPoint: {x: -5, y: 5, z: 5}
-  - dataLength: 0
-    eventNum: 0
-    spawnPoint: {x: -5, y: 5, z: 5}
-  - dataLength: 0
-    eventNum: 0
-    spawnPoint: {x: -5, y: 5, z: 5}
---- !u!114 &387046582
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 387046575}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 188a86eb01a3848b29f82994bfd01c91, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spawnChoicePointData:
+    arrowActive: 1
   - dataLength: 0
     eventNum: 83
-    spawnChoicePoint: {x: 100, y: 40, z: 115}
+    spawnPoint: {x: -5, y: 5, z: 5}
+    arrowActive: 1
   - dataLength: 0
     eventNum: 89
-    spawnChoicePoint: {x: 100, y: 40, z: 115}
+    spawnPoint: {x: -5, y: 5, z: 5}
+    arrowActive: 0
   - dataLength: 0
     eventNum: 90
-    spawnChoicePoint: {x: 100, y: 40, z: 115}
+    spawnPoint: {x: -5, y: 5, z: 5}
+    arrowActive: 0
   - dataLength: 0
     eventNum: 91
-    spawnChoicePoint: {x: 100, y: 40, z: 115}
+    spawnPoint: {x: -5, y: 5, z: 5}
+    arrowActive: 0
   - dataLength: 0
     eventNum: 92
-    spawnChoicePoint: {x: 100, y: 40, z: 115}
+    spawnPoint: {x: -5, y: 5, z: 5}
+    arrowActive: 0
   - dataLength: 0
     eventNum: 93
-    spawnChoicePoint: {x: 100, y: 40, z: 115}
+    spawnPoint: {x: -5, y: 5, z: 5}
+    arrowActive: 0
   - dataLength: 0
     eventNum: 95
-    spawnChoicePoint: {x: 100, y: 40, z: 115}
+    spawnPoint: {x: -5, y: 5, z: 5}
+    arrowActive: 1
   - dataLength: 0
     eventNum: 96
-    spawnChoicePoint: {x: 100, y: 40, z: 115}
+    spawnPoint: {x: -5, y: 5, z: 5}
+    arrowActive: 1
   - dataLength: 0
     eventNum: 97
-    spawnChoicePoint: {x: 100, y: 40, z: 115}
+    spawnPoint: {x: -5, y: 5, z: 5}
+    arrowActive: 1
   - dataLength: 0
     eventNum: 98
-    spawnChoicePoint: {x: 100, y: 40, z: 115}
+    spawnPoint: {x: -5, y: 5, z: 5}
+    arrowActive: 1
   - dataLength: 0
     eventNum: 99
-    spawnChoicePoint: {x: 100, y: 40, z: 115}
+    spawnPoint: {x: -5, y: 5, z: 5}
+    arrowActive: 1
 --- !u!1 &388283448
 GameObject:
   m_ObjectHideFlags: 0
@@ -4878,11 +5803,11 @@ Prefab:
     - target: {fileID: 3380982, guid: 4d293c8e162f3874b982baadd71153d2, type: 2}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 2072704393}
+      objectReference: {fileID: 737234279}
     - target: {fileID: 2348914, guid: 4d293c8e162f3874b982baadd71153d2, type: 2}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 1610800151}
+      objectReference: {fileID: 1623152465}
     - target: {fileID: 146900, guid: 4d293c8e162f3874b982baadd71153d2, type: 2}
       propertyPath: m_IsActive
       value: 1
@@ -5228,6 +6153,134 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 718339067}
+--- !u!43 &737234279
+Mesh:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  serializedVersion: 8
+  m_SubMeshes:
+  - serializedVersion: 2
+    firstByte: 0
+    indexCount: 24
+    topology: 0
+    firstVertex: 0
+    vertexCount: 8
+    localAABB:
+      m_Center: {x: 0, y: 0.01, z: 0}
+      m_Extent: {x: 1.65, y: 0, z: 1.275}
+  m_Shapes:
+    vertices: []
+    shapes: []
+    channels: []
+    fullWeights: []
+  m_BindPose: []
+  m_BoneNameHashes: 
+  m_RootBoneNameHash: 0
+  m_MeshCompression: 0
+  m_IsReadable: 1
+  m_KeepVertices: 1
+  m_KeepIndices: 1
+  m_IndexBuffer: 000004000100010004000500010005000200020005000600020006000300030006000700030007000000000007000400
+  m_Skin: []
+  m_VertexData:
+    m_CurrentChannels: 13
+    m_VertexCount: 8
+    m_Channels:
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 3
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 12
+      format: 0
+      dimension: 4
+    - stream: 0
+      offset: 28
+      format: 0
+      dimension: 2
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    m_DataSize: 288
+    _typelessdata: 0000c03f0ad7233c0000903f000000000000803f0000803f0000803f00000000000000000000c03f0ad7233c000090bf000000000000803f0000803f0000803f0000803f000000000000c0bf0ad7233c000090bf000000000000803f0000803f0000803f00000000000000000000c0bf0ad7233c0000903f000000000000803f0000803f0000803f0000803f000000003333d33f0ad7233c3333a33f000000000000803f0000803f00000000000000000000803f3333d33f0ad7233c3333a3bf000000000000803f0000803f000000000000803f0000803f3333d3bf0ad7233c3333a3bf000000000000803f0000803f00000000000000000000803f3333d3bf0ad7233c3333a33f000000000000803f0000803f000000000000803f0000803f
+  m_CompressedMesh:
+    m_Vertices:
+      m_NumItems: 0
+      m_Range: 0
+      m_Start: 0
+      m_Data: 
+      m_BitSize: 0
+    m_UV:
+      m_NumItems: 0
+      m_Range: 0
+      m_Start: 0
+      m_Data: 
+      m_BitSize: 0
+    m_Normals:
+      m_NumItems: 0
+      m_Range: 0
+      m_Start: 0
+      m_Data: 
+      m_BitSize: 0
+    m_Tangents:
+      m_NumItems: 0
+      m_Range: 0
+      m_Start: 0
+      m_Data: 
+      m_BitSize: 0
+    m_Weights:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+    m_NormalSigns:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+    m_TangentSigns:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+    m_FloatColors:
+      m_NumItems: 0
+      m_Range: 0
+      m_Start: 0
+      m_Data: 
+      m_BitSize: 0
+    m_BoneIndices:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+    m_Triangles:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+    m_UVInfo: 0
+  m_LocalAABB:
+    m_Center: {x: 0, y: 0.01, z: 0}
+    m_Extent: {x: 1.65, y: 0, z: 1.275}
+  m_MeshUsageFlags: 0
+  m_BakedConvexCollisionMesh: 
+  m_BakedTriangleCollisionMesh: 
+  m_MeshOptimized: 0
 --- !u!1 &762169154
 GameObject:
   m_ObjectHideFlags: 0
@@ -17211,7 +18264,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1000011909266368, guid: ce61f4897183cf14587aed6db63586fd, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1000011909266368, guid: ce61f4897183cf14587aed6db63586fd, type: 2}
       propertyPath: m_Layer
@@ -17284,7 +18337,6 @@ MonoBehaviour:
   menuUI: {fileID: 478213547}
   playerpos: {fileID: 547211100}
   animCommand: {fileID: 1275351913}
-  gageMax: 0
 --- !u!114 &1275351916
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17318,6 +18370,7 @@ MonoBehaviour:
   - {fileID: 488622641}
   Character:
   - {fileID: 347396287}
+  gArrow: {fileID: 765055400}
   choiceText: []
 --- !u!4 &1275351917
 Transform:
@@ -17585,6 +18638,7 @@ GameObject:
   - 224: {fileID: 1424279574}
   - 222: {fileID: 1424279576}
   - 114: {fileID: 1424279575}
+  - 114: {fileID: 1424279577}
   m_Layer: 5
   m_Name: UnderText
   m_TagString: Untagged
@@ -17607,8 +18661,8 @@ RectTransform:
   m_RootOrder: 1
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 497}
-  m_SizeDelta: {x: 818, y: 390}
+  m_AnchoredPosition: {x: 0, y: 460}
+  m_SizeDelta: {x: 500, y: 390}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1424279575
 MonoBehaviour:
@@ -17649,6 +18703,20 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1424279573}
+--- !u!114 &1424279577
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1424279573}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
 --- !u!1 &1467770927
 GameObject:
   m_ObjectHideFlags: 0
@@ -17756,7 +18824,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: 0, y: 497}
-  m_SizeDelta: {x: 818, y: 390}
+  m_SizeDelta: {x: 500, y: 390}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1475778561
 MonoBehaviour:
@@ -18938,35 +20006,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1602602511}
---- !u!21 &1610800151
-Material:
-  serializedVersion: 6
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: Sprites/Default
-  m_Shader: {fileID: 10753, guid: 0000000000000000f000000000000000, type: 0}
-  m_ShaderKeywords: 
-  m_LightmapFlags: 5
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  m_SavedProperties:
-    serializedVersion: 2
-    m_TexEnvs:
-    - first:
-        name: _MainTex
-      second:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Floats:
-    - first:
-        name: PixelSnap
-      second: 0
-    m_Colors:
-    - first:
-        name: _Color
-      second: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &1615806882
 GameObject:
   m_ObjectHideFlags: 0
@@ -19035,6 +20074,35 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1615806882}
+--- !u!21 &1623152465
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Sprites/Default
+  m_Shader: {fileID: 10753, guid: 0000000000000000f000000000000000, type: 0}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 5
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  m_SavedProperties:
+    serializedVersion: 2
+    m_TexEnvs:
+    - first:
+        name: _MainTex
+      second:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - first:
+        name: PixelSnap
+      second: 0
+    m_Colors:
+    - first:
+        name: _Color
+      second: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &1672728589
 GameObject:
   m_ObjectHideFlags: 0
@@ -19509,7 +20577,6 @@ MonoBehaviour:
   menuUI: {fileID: 478213547}
   playerpos: {fileID: 206619993}
   animCommand: {fileID: 1847499407}
-  gageMax: 0
 --- !u!114 &1847499411
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19528,6 +20595,7 @@ MonoBehaviour:
   getChoiceCanvas: []
   getChoiceText: []
   Character: []
+  gArrow: {fileID: 0}
   choiceText: []
 --- !u!1 &1881537615
 GameObject:
@@ -19713,7 +20781,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1931891033}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2ca0da66adc166d4189000a84d8b03a6, type: 3}
   m_Name: 
@@ -20070,134 +21138,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 50
   m_Center: {x: 0, y: 0, z: 0}
---- !u!43 &2072704393
-Mesh:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: 
-  serializedVersion: 8
-  m_SubMeshes:
-  - serializedVersion: 2
-    firstByte: 0
-    indexCount: 24
-    topology: 0
-    firstVertex: 0
-    vertexCount: 8
-    localAABB:
-      m_Center: {x: 0, y: 0.01, z: 0}
-      m_Extent: {x: 1.65, y: 0, z: 1.275}
-  m_Shapes:
-    vertices: []
-    shapes: []
-    channels: []
-    fullWeights: []
-  m_BindPose: []
-  m_BoneNameHashes: 
-  m_RootBoneNameHash: 0
-  m_MeshCompression: 0
-  m_IsReadable: 1
-  m_KeepVertices: 1
-  m_KeepIndices: 1
-  m_IndexBuffer: 000004000100010004000500010005000200020005000600020006000300030006000700030007000000000007000400
-  m_Skin: []
-  m_VertexData:
-    m_CurrentChannels: 13
-    m_VertexCount: 8
-    m_Channels:
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 3
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 0
-    - stream: 0
-      offset: 12
-      format: 0
-      dimension: 4
-    - stream: 0
-      offset: 28
-      format: 0
-      dimension: 2
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 0
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 0
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 0
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 0
-    m_DataSize: 288
-    _typelessdata: 0000c03f0ad7233c0000903f000000000000803f0000803f0000803f00000000000000000000c03f0ad7233c000090bf000000000000803f0000803f0000803f0000803f000000000000c0bf0ad7233c000090bf000000000000803f0000803f0000803f00000000000000000000c0bf0ad7233c0000903f000000000000803f0000803f0000803f0000803f000000003333d33f0ad7233c3333a33f000000000000803f0000803f00000000000000000000803f3333d33f0ad7233c3333a3bf000000000000803f0000803f000000000000803f0000803f3333d3bf0ad7233c3333a3bf000000000000803f0000803f00000000000000000000803f3333d3bf0ad7233c3333a33f000000000000803f0000803f000000000000803f0000803f
-  m_CompressedMesh:
-    m_Vertices:
-      m_NumItems: 0
-      m_Range: 0
-      m_Start: 0
-      m_Data: 
-      m_BitSize: 0
-    m_UV:
-      m_NumItems: 0
-      m_Range: 0
-      m_Start: 0
-      m_Data: 
-      m_BitSize: 0
-    m_Normals:
-      m_NumItems: 0
-      m_Range: 0
-      m_Start: 0
-      m_Data: 
-      m_BitSize: 0
-    m_Tangents:
-      m_NumItems: 0
-      m_Range: 0
-      m_Start: 0
-      m_Data: 
-      m_BitSize: 0
-    m_Weights:
-      m_NumItems: 0
-      m_Data: 
-      m_BitSize: 0
-    m_NormalSigns:
-      m_NumItems: 0
-      m_Data: 
-      m_BitSize: 0
-    m_TangentSigns:
-      m_NumItems: 0
-      m_Data: 
-      m_BitSize: 0
-    m_FloatColors:
-      m_NumItems: 0
-      m_Range: 0
-      m_Start: 0
-      m_Data: 
-      m_BitSize: 0
-    m_BoneIndices:
-      m_NumItems: 0
-      m_Data: 
-      m_BitSize: 0
-    m_Triangles:
-      m_NumItems: 0
-      m_Data: 
-      m_BitSize: 0
-    m_UVInfo: 0
-  m_LocalAABB:
-    m_Center: {x: 0, y: 0.01, z: 0}
-    m_Extent: {x: 1.65, y: 0, z: 1.275}
-  m_MeshUsageFlags: 0
-  m_BakedConvexCollisionMesh: 
-  m_BakedTriangleCollisionMesh: 
-  m_MeshOptimized: 0
 --- !u!1 &2117910272
 GameObject:
   m_ObjectHideFlags: 0

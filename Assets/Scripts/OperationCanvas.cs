@@ -10,8 +10,8 @@ public class OperationCanvas : MonoBehaviour {
 	}
 	void Update () {
 		transform.rotation = rotateCamera.transform.rotation;
-	}
-	void Disable() {
+    }
+    void Disable() {
 		this.gameObject.SetActive(false);
 	}
 

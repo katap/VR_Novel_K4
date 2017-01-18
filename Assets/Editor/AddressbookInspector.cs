@@ -20,7 +20,7 @@ public class AddressbookInspector : Editor
         };
         reorderableList.drawHeaderCallback += rect =>
         {
-            EditorGUI.LabelField(rect, "No./MCanv/Choice./CLen/DCLen/Siz/Delay:");
+            EditorGUI.LabelField(rect, "No./MCanv/MCNoS./CLen/DCLen/Siz/Delay:");
         };
     }
 
@@ -50,7 +50,7 @@ public class AddressChoiceBookInspector : Editor
         };
         reorderableList.drawHeaderCallback += rect =>
         {
-            EditorGUI.LabelField(rect, "DNo./CTextNo./CNum1/FSiz1/Cnum2/FSiz2:");
+            EditorGUI.LabelField(rect, "DNo./CTextNo./CNum1/FSiz1/NcNo1./Cnum2/FSiz2/NcNo2.:");
         };
     }
 
@@ -141,7 +141,7 @@ public class AddressSpawnPointInspector : Editor
         };
         reorderableList.drawHeaderCallback += rect =>
         {
-            EditorGUI.LabelField(rect, "No./EventNo./SpawnPoint");
+            EditorGUI.LabelField(rect, "No./EventNo./AActive/SpawnPoint");
         };
     }
     

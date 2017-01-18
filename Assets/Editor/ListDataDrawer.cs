@@ -42,7 +42,7 @@ public class ChoiceDataDrawer : PropertyDrawer
     {
         DataDrawarControl draw = new DataDrawarControl();
 
-        position.width *= 0.15f;
+        position.width *= 0.12f;
         draw.dataDrawer("debugNo",      position, property, label);
 
         position.x += position.width;
@@ -55,10 +55,16 @@ public class ChoiceDataDrawer : PropertyDrawer
         draw.dataDrawer("FontSize1",   position, property, label);
 
         position.x += position.width;
+        draw.dataDrawer("nextChoiceNo1", position, property, label);
+
+        position.x += position.width;
         draw.dataDrawer("canvasnum2",   position, property, label);
 
         position.x += position.width;
         draw.dataDrawer("FontSize2",    position, property, label);
+
+        position.x += position.width;
+        draw.dataDrawer("nextChoiceNo2", position, property, label);
 
     }
 }
@@ -115,10 +121,14 @@ public class SpawnPointDataDrawer : PropertyDrawer
         position.x += position.width;
         draw.dataDrawer("eventNum",     position, property, label);
 
-        position.width *= 8f;
+        position.width *= 7.5f;
         position.x += position.width * 0.13f;
         draw.dataDrawer("spawnPoint",   position, property, label);
-
+        
+        position.width *= 1f;
+        position.x += position.width;
+        draw.dataDrawer("arrowActive", position, property, label);
+        
     }
 }
 
@@ -135,11 +145,11 @@ public class SpawnChoicePointDataDrawer : PropertyDrawer
 		position.x += position.width;
 		draw.dataDrawer("eventNum",     position, property, label);
 
-		position.width *= 8f;
+        position.width *= 7f;
 		position.x += position.width * 0.13f;
 		draw.dataDrawer("spawnChoicePoint",   position, property, label);
 
-	}
+    }
 }
 
 public class DataDrawarControl
