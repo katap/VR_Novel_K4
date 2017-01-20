@@ -31,9 +31,24 @@ public class GUIArrowGet : MonoBehaviour
             canvasRect.width - irtr.width,
             canvasRect.height - irtr.height
         );
+        icon.enabled = false;
     }
 
     private void Update()
+    {
+        if (animCom.spawnEventActive)
+        {
+            if (animCom.aActive[animCom.y - 1]) {
+                iconEnable();
+            }
+        }
+        else
+        {
+            iconEnable();
+        }
+    }
+
+    private void iconEnable()
     {
         var viewport = targetCamera.WorldToViewportPoint(animCom.setAllCanvas()[animCom.nowC].transform.position);
         if (animCom.canvasAcrive[animCom.nowC]._isRendered)
@@ -52,7 +67,6 @@ public class GUIArrowGet : MonoBehaviour
             viewport.x = Mathf.Clamp01(viewport.x);
             viewport.y = Mathf.Clamp01(viewport.y);
             icon.rectTransform.anchoredPosition = Rect.NormalizedToPoint(canvasRect, viewport);
-
         }
     }
 }

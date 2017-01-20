@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 using sysArray = System.Array;
+using System.IO;
 
 public class Animation_Command : MonoBehaviour
 {
@@ -73,15 +74,16 @@ private int[] moveTransition;
     private int x;
 
     //  TransitionSpawnPoint習得用関数群
-    private int[] spawnEvent;
+    [System.NonSerialized]
+    public int[] spawnEvent;
     private Vector3[] spawnPointVector3;
     [System.NonSerialized]
     public bool[] aActive;
-
+    /*
 	//  TransitionSpawnChoicePoint習得用関数群
 	private int[] spawnChoicePointEvent;
     private Vector3[] spawnChoicePointVector3;
-
+    */
     [System.NonSerialized]
     public int choiceswitch;
     [System.NonSerialized]
@@ -97,7 +99,7 @@ private int[] moveTransition;
     TransitionChoice tChoice;
     TransitionChoiceText tChoiceText;
     TransitionSpawnPoint tSpawnPoint;
-    TransitionSpawnChoicePoint tSpawnChoicePoint;
+    //TransitionSpawnChoicePoint tSpawnChoicePoint;
     TextController TController;
     TransitionAnimBook aBook;
     [System.NonSerialized]
@@ -120,7 +122,8 @@ private int[] moveTransition;
     private int BeforeLenth = 0;
 
     //  現在のシナリオ行数
-    private int scenarioNum;
+    [System.NonSerialized]
+    public int scenarioNum;
 
     //  一つ前に実行されていたキャンバスを入力する
     private GameObject CanvasTorpidity;
@@ -215,7 +218,10 @@ private int[] moveTransition;
         //  選択画面を何回連続で表示するか、値を習得
         BeforeLenth = choiceLength[j];
 
-        //setBookprocessing();
+        setBookprocessing();
+        characterAnimation();
+
+        textSave(System.DateTime.Now.ToString());
 
     }
 
@@ -271,7 +277,17 @@ private int[] moveTransition;
     {
 		if (scenarioNum == spawnEvent[y])
         {
-			setAllCanvas()[nowC].transform.localPosition = spawnPointVector3[y];
+            /*
+            if(aActive[y] == false)
+            {
+                gArrow.SetActive(false);
+            }
+            else
+            {
+                gArrow.SetActive(true);
+            }
+            */
+            setAllCanvas()[nowC].transform.localPosition = spawnPointVector3[y];
             y++;
 			spawnEventActive = true;
             timeCount = 0;
@@ -280,6 +296,7 @@ private int[] moveTransition;
         {
             setAllCanvas()[nowC].transform.localPosition = setCanvasPositionInitialValue[nowC];
         }
+
         if (spawnEventActive == true)
         {
             timeCount += Time.deltaTime;
@@ -289,6 +306,7 @@ private int[] moveTransition;
         {
             Debug.Log("Time : " + timeCount);
             timeDisplay = spawnEvent[y];
+            textSave("Time : " + timeCount);
         }
     }
 
@@ -816,5 +834,13 @@ private int[] moveTransition;
         {
             canvasAcrive[i] = setAllCanvas()[i].GetComponent<GUIArrowActive>();
         }
-    }    
+    }
+
+    public void textSave(string txt)
+    {
+        StreamWriter sw = new StreamWriter("LogData.txt", true); //true=追記 false=上書き
+        sw.WriteLine(txt);
+        sw.Flush();
+        sw.Close();
+    }
 }

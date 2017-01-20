@@ -176,7 +176,7 @@ public class CircleCursole : MonoBehaviour {
 
         if (menuAlpha)
         {
-            cGroup.alpha -= 0.02f;
+            cGroup.alpha -= 0.01f;
             image.fillAmount = 0;
             backImage.fillAmount = 0;
         }
@@ -211,7 +211,8 @@ public class CircleCursole : MonoBehaviour {
                 if (hit.collider.gameObject.name == ChoiceText[i].name)
                 {
                     objectName = hit.collider.gameObject.name;
-                    Debug.Log( objectName + ":" + ChoiceText[i].fontSize);
+                    Debug.Log(objectName + ":" + ChoiceText[i].fontSize);
+                    animCom.textSave(objectName + ":" + ChoiceText[i].fontSize);
                     //animCom.k += 1;
                     if (objectName == "ChoiceText1")
                     {
