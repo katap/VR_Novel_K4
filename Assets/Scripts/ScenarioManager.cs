@@ -8,14 +8,19 @@ public class ScenarioManager : SingletonMonoBehaviourFast<ScenarioManager> {
 
 	public string LoadFileName;
 
-	private string[] m_scenarios;
-	private int m_currentLine = 0;
-	private bool m_isCallPreload = false;
+    [System.NonSerialized]
+	public string[] m_scenarios;
+    [System.NonSerialized]
+    public int m_currentLine = 0;
+    [System.NonSerialized]
+    public bool m_isCallPreload = false;
 
-	private TextController m_textController;
-	private CommandController m_commandController;
+    [System.NonSerialized]
+	public TextController m_textController;
+    [System.NonSerialized]
+    public CommandController m_commandController;
 
-	void RequestNextLine ()
+	public void RequestNextLine ()
 	{
 		var currentText = m_scenarios[m_currentLine];
 
@@ -71,10 +76,10 @@ public class ScenarioManager : SingletonMonoBehaviourFast<ScenarioManager> {
 		UpdateLines(LoadFileName);
 		RequestNextLine();
 	}
-	
-	void Update () 
+
+    void Update () 
 	{
-		if( m_textController.IsCompleteDisplayText  ){
+        if ( m_textController.IsCompleteDisplayText  ){
 			if( m_currentLine < m_scenarios.Length)
 			{
 				if( !m_isCallPreload )
@@ -83,15 +88,25 @@ public class ScenarioManager : SingletonMonoBehaviourFast<ScenarioManager> {
 					m_isCallPreload = true;
 				}
 						
-				if( Input.GetMouseButtonDown(0)){
+				if( Input.GetMouseButtonUp(0)){
 					RequestNextLine();
 				}
+
+                if(m_textController.maneger != 1)
+                {
+                    if (Input.GetMouseButtonUp(1))
+                    {
+                        m_textController.maneger -= 2;
+                        m_currentLine -= 2;
+                        RequestNextLine();
+                    }
+                }
 			}
 		}else{
-			if(Input.GetMouseButtonDown(0)){
+			if(Input.GetMouseButtonUp(0)){
 				m_textController.ForceCompleteDisplayText();
 			}
-		}
+        }
 	}
 
 #endregion

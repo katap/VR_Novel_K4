@@ -65,10 +65,10 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\AdjustHeight.cs" />
     <Compile Include="Assets\Scripts\AdjustHeightImage.cs" />
-    <Compile Include="Assets\Scripts\Animation_Command.cs" />
     <Compile Include="Assets\Scripts\Back.cs" />
     <Compile Include="Assets\Scripts\CanvasFix.cs" />
     <Compile Include="Assets\Scripts\CanvasTransition.cs" />
+    <Compile Include="Assets\Scripts\CentralController.cs" />
     <Compile Include="Assets\Scripts\CircleCursole.cs" />
     <Compile Include="Assets\Scripts\Clicker.cs" />
     <Compile Include="Assets\Scripts\CommandController.cs" />
@@ -88,6 +88,7 @@
     <Compile Include="Assets\Scripts\SingletonMonoBehaviourFast.cs" />
     <Compile Include="Assets\Scripts\SmoothLook.cs" />
     <Compile Include="Assets\Scripts\SmoothLookTest.cs" />
+    <Compile Include="Assets\Scripts\SteamVR_ControllerScenarioManeger.cs" />
     <Compile Include="Assets\Scripts\TextController.cs" />
     <Compile Include="Assets\Scripts\TextureresourceManager.cs" />
     <Compile Include="Assets\Scripts\TransitionAnimBook.cs" />

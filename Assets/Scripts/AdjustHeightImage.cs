@@ -14,6 +14,6 @@ public class AdjustHeightImage : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	image.rectTransform.sizeDelta = new Vector2(image.rectTransform.sizeDelta.x, tx.rectTransform.sizeDelta.y + 40f);
+	    image.rectTransform.sizeDelta = new Vector2(image.rectTransform.sizeDelta.x, tx.rectTransform.sizeDelta.y + 40f);
     }
 }

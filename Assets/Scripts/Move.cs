@@ -3,8 +3,6 @@ using System.Collections;
 
 public class Move : MonoBehaviour
 {
-    //public Vector3 pos;
-    private GameObject obj;
     public float hight = 1;
 
     public float gravity = 10.0f;//重力加速度

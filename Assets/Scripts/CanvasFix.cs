@@ -8,8 +8,8 @@ public class CanvasFix : MonoBehaviour {
 
     public float posx;
     public float posy;
-    [SerializeField, Range(0.0f, 1.0f)]
-    private float rate; // ※
+    [Range(0.0f, 1.0f)]
+    public float rate; // ※
 
     // Use this for initialization
     void Start () {

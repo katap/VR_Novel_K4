@@ -23,12 +23,12 @@ public class look : MonoBehaviour
     [Tooltip("青線を基準とした緑線の回転")]
     public int extraTargetAngle = 0;
 
-    public GameObject animationCommancPlace;
-    Animation_Command animCom;
+    public GameObject centralControllerPlace;
+    CentralController animCom;
 
     void Start()
     {
-        animCom = animationCommancPlace.GetComponent<Animation_Command>();
+        animCom = centralControllerPlace.GetComponent<CentralController>();
     }
 
     void Update()

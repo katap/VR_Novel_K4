@@ -2,6 +2,7 @@
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.Collections;
+using System.Collections.Generic;
 
 public class CircleCursole : MonoBehaviour {
 
@@ -16,7 +17,7 @@ public class CircleCursole : MonoBehaviour {
     public Text[] ChoiceText;
     public GameObject menuUI;
     public GameObject playerpos;
-    public GameObject animCommand;
+    public GameObject centralControllerPlace;
     private CanvasGroup cGroup;
 
     [System.NonSerialized]
@@ -28,7 +29,7 @@ public class CircleCursole : MonoBehaviour {
     public bool one;
     [System.NonSerialized]
     public string objectName;
-    Animation_Command animCom;
+    CentralController animCom;
 
     RaycastHit hit;
 
@@ -42,7 +43,7 @@ public class CircleCursole : MonoBehaviour {
         cGroup = menuUI.GetComponent<CanvasGroup>();
         cGroup.alpha = 0;
         one = false;
-        animCom = animCommand.GetComponent<Animation_Command>();
+        animCom = centralControllerPlace.GetComponent<CentralController>();
     }
 
     // Update is called once per frame
@@ -105,9 +106,9 @@ public class CircleCursole : MonoBehaviour {
         }
         else
         {
-            image.fillAmount -= 0.02f;
-            backImage.fillAmount -= 0.02f;
-            ChoiceImage.fillAmount -= 0.02f;
+            image.fillAmount -= 0.01f;
+            backImage.fillAmount -= 0.01f;
+            ChoiceImage.fillAmount = 0.0f;
         }
     }
 
@@ -155,7 +156,7 @@ public class CircleCursole : MonoBehaviour {
         }
         if (menuActive)
         {
-            cGroup.alpha += 0.02f;
+            cGroup.alpha += 0.01f;
         }
     }
 
@@ -211,20 +212,27 @@ public class CircleCursole : MonoBehaviour {
                 if (hit.collider.gameObject.name == ChoiceText[i].name)
                 {
                     objectName = hit.collider.gameObject.name;
-                    Debug.Log(objectName + ":" + ChoiceText[i].fontSize);
-                    animCom.textSave(objectName + ":" + ChoiceText[i].fontSize);
+                    //Debug.Log(objectName + ":" + ChoiceText[i].fontSize);
+                    animCom.cBackSize.Add(ChoiceText[i].fontSize);
+                    //animCom.textSave(objectName + ":" + ChoiceText[i].fontSize);
                     //animCom.k += 1;
                     if (objectName == "ChoiceText1")
                     {
                         animCom.beforeswitch = animCom.choiceswitch;
                         animCom.choiceswitch = animCom.nextNo1[animCom.k];
                         animCom.k = animCom.nextNo1[animCom.k];
+                        animCom.cBack.Add(animCom.k);
                     }
                     else if (objectName == "ChoiceText2")
                     {
                         animCom.beforeswitch = animCom.choiceswitch;
                         animCom.choiceswitch = animCom.nextNo2[animCom.k];
                         animCom.k = animCom.nextNo2[animCom.k];
+                        animCom.cBack.Add(animCom.k);
+                    }
+                    foreach (int num in animCom.cBack)
+                    {
+                        Debug.Log(num);
                     }
                 }
             }
@@ -249,11 +257,11 @@ public class CircleCursole : MonoBehaviour {
     {
         if (hit.transform.gameObject.tag == str )
         {
-            img.fillAmount += 0.02f;
+            img.fillAmount += 0.01f;
         }
         else
         {
-            img.fillAmount -= 0.02f;
+            img.fillAmount = 0.0f;
         }
     }
 }

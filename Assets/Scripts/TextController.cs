@@ -40,7 +40,7 @@ public class TextController : MonoBehaviour
 		timeUntilDisplay = currentText.Length * intervalForCharacterDisplay;
 		timeElapsed = Time.time;
 		lastUpdateCharacter = -1;
-        maneger += 1;
+        maneger ++;
 	}
 
 #region UNITY_CALLBACK	
@@ -51,7 +51,8 @@ public class TextController : MonoBehaviour
         int displayCharacterCount = (int)(Mathf.Clamp01((Time.time - timeElapsed) / timeUntilDisplay) * currentText.Length);
 		if (NoDeley) {
 			_uiText.text = currentText;
-		} else {
+            timeUntilDisplay = 0;
+        } else {
 			if (displayCharacterCount != lastUpdateCharacter) {
 				_uiText.text = currentText.Substring (0, displayCharacterCount);
 				lastUpdateCharacter = displayCharacterCount;

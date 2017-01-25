@@ -13,6 +13,5 @@ public class AdjustHeight : MonoBehaviour {
 	void Update () {
         Text text = GetComponent<Text>();
         text.rectTransform.sizeDelta = new Vector2(text.rectTransform.sizeDelta.x, text.preferredHeight);
-
     }
 }

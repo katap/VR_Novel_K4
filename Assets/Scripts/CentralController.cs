@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using sysArray = System.Array;
 using System.IO;
 
-public class Animation_Command : MonoBehaviour
+public class CentralController : MonoBehaviour
 {
     #region Inspector
 
@@ -15,6 +15,9 @@ public class Animation_Command : MonoBehaviour
 
     [Tooltip("Transition ○○ を入れてある Hieralcy オブジェクトを入れてください。")]
     public GameObject transitionPlace;
+
+    [Tooltip("制御したい GuiArrow がある Hieralcy オブジェクトを入れてください。")]
+    public GameObject gArrow;
 
     [Tooltip("表示したいテキストフィールドがあるキャンバスを入れてください。 GuiArrowActive を アタッチする必要があります。")]
     public GameObject[] getCanvas;
@@ -31,16 +34,13 @@ public class Animation_Command : MonoBehaviour
     [Tooltip("アニメーションさせたい Character を入れてください。")]
     public GameObject[] Character;
 
-    [Tooltip("制御したい GuiArrow がある Hieralcy オブジェクトを入れてください。")]
-    public GameObject gArrow;
-
     #endregion
 
 
     #region GetTransition
 
-//  TransitionBook習得用関数群
-private int[] moveTransition;
+    //  TransitionBook習得用関数群
+    private int[] moveTransition;
     private int[] moveCanvas;
     private int[] moveChoiceNoSelect;
     private int[] choiceLength;
@@ -51,16 +51,24 @@ private int[] moveTransition;
     private int[] cNo;
     private int[] canvasNum1;
     private int[] fontSize1;
-    [System.NonSerialized]
-    public int[] nextNo1;
+
+    private int[] NextNo1;
+    public int[] nextNo1{
+        get { return NextNo1; }
+        private set { NextNo1 = value; }
+    }
+
     private int[] canvasNum2;
     private int[] fontSize2;
-    [System.NonSerialized]
-    public int[] nextNo2;
+
+    private int[] NextNo2;
+    public int[] nextNo2{
+        get { return NextNo2; }
+        private set { NextNo2 = value; }
+    }
 
     //  TransitionChoiceText習得用関群
-    [HideInInspector]
-    public string[] choiceText;
+    private string[] choiceText;
 
     //  TransitionAnimBook習得用関数群
     private int[] aniNo;
@@ -74,21 +82,26 @@ private int[] moveTransition;
     private int x;
 
     //  TransitionSpawnPoint習得用関数群
-    [System.NonSerialized]
-    public int[] spawnEvent;
+    private int[] spawnEvent;
     private Vector3[] spawnPointVector3;
-    [System.NonSerialized]
-    public bool[] aActive;
-    /*
-	//  TransitionSpawnChoicePoint習得用関数群
-	private int[] spawnChoicePointEvent;
-    private Vector3[] spawnChoicePointVector3;
-    */
+
+    private bool[] AActive;
+    public bool[] aActive{
+        get { return AActive; }
+        set { AActive = value; }
+    }
+
     [System.NonSerialized]
     public int choiceswitch;
     [System.NonSerialized]
     public int beforeswitch;
-    private CircleCursole cCursole;
+
+	//  TransitionSpawnChoicePoint習得用関数群
+    /*
+	private int[] spawnChoicePointEvent;
+    private Vector3[] spawnChoicePointVector3;
+    */
+
 
     #endregion
 
@@ -102,38 +115,50 @@ private int[] moveTransition;
     //TransitionSpawnChoicePoint tSpawnChoicePoint;
     TextController TController;
     TransitionAnimBook aBook;
-    [System.NonSerialized]
-    public GUIArrowActive[] canvasAcrive;
+
+    private GUIArrowActive[] CanvasActive;
+    public GUIArrowActive[] canvasActive{
+        get { return CanvasActive; }
+        set { CanvasActive = value; }
+    }
+
+    public ScenarioManager sMan{ get; set; }
 
     #endregion
 
 
     #region BasicFunction
 
-    //  現在のTransitionBookの行数
+    //  現在の TransitionBook の行数
     private int j = 0;
 
-    //  現在のTransitionChoiceの行数
-    //  CircleCursole内でプラス処理を行う
+    //  現在の TransitionChoice の行数
+    //  CircleCursole 内でプラス処理を行う
     [System.NonSerialized]
     public int k = 0;
 
+    //  TransitionChoice の Back 処理
+    [System.NonSerialized]
+    public List<int> cBack = new List<int>();
+    //  TransitionChoice が有効になっている際に、Back処理が行われても
+    //  最終的に辿ってきた FontSize の正常な値を返すために一時保存するための関数
+    [System.NonSerialized]
+    public List<int> cBackSize = new List<int>();
+
     //  transitionChoiceが何行実行されるかを管理する。
-    private int BeforeLenth = 0;
+    private int BeforeLenth;
 
     //  現在のシナリオ行数
-    [System.NonSerialized]
-    public int scenarioNum;
+    private int scenarioNum;
 
     //  一つ前に実行されていたキャンバスを入力する
     private GameObject CanvasTorpidity;
 
     //  現在表示されているキャンバス
-    [System.NonSerialized]
-    public int nowC;
+    public int nowC { get; set; }
 
     //  CanvasPosition の初期値を入力する
-    private Vector3[] setCanvasPositionInitialValue;
+    private Vector3[] setCanvasInitialPositionValue;
 
     #endregion
 
@@ -141,23 +166,20 @@ private int[] moveTransition;
     #region SpawnEventRelation
 
     //  spawnEvent の行数を管理
-    [System.NonSerialized]
-    public int y;
+    public int y{ get; set; }
 
     //  scenarioNum の値と spawnEvent[y] の値が一致した時に True になる
-    [System.NonSerialized]
-    public bool spawnEventActive;
+    public bool spawnEventActive{ get; set; }
+
     //  spawnEventActive を、scenarioNum の値が変化するごとに１回だけ false にする関数に使用する
     //  この関数はmoveObjectが呼び出される前に記述する
-    [System.NonSerialized]
-    public int count;
+    private int count;
 
     //  キャンパスが移動してからキャンパスを発見するまでの時間を保存
-    [System.NonSerialized]
     private float timeCount;
+
     //  timeCount の Debug.Log() を移動、発見後一回だけ表示させるために、spawnEvent[y] の値を格納しておく
-    [System.NonSerialized]
-    public int timeDisplay;
+    private int timeDisplay;
 
     #endregion
 
@@ -187,41 +209,47 @@ private int[] moveTransition;
      */
     public void startMove()
     {
-        TController = textControllerPlace.GetComponent<TextController>();
-        cCursole = GetComponent<CircleCursole>();
-        //  最初に表示するキャンパスを格納
-        CanvasTorpidity = getCanvas[0];
-
-        nowC = 0;
-
-		count = 0;
-
-        choiceswitch = 0;
-
         //  配列に値を入れる処理
         settBook();
         settChoice();
         setTchoiceText();
         setAnimBook();
         setSpawnPoint();
-		//setSpawnChoicePoint ();
+		//  setSpawnChoicePoint ();
+
         setAllCanvas();
         setGuiArrowActive();
+        setCanvasInitialPosition();
 
-        timeDisplay = spawnEvent[y];
 
-        sysArray.Resize(ref setCanvasPositionInitialValue, setAllCanvas().Length);
-        for(int i = 0; i < setAllCanvas().Length; i++)
+        TController = textControllerPlace.GetComponent<TextController>();
+        sMan = textControllerPlace.GetComponent<ScenarioManager>();
+
+
+        // アクティブなキャンバスを非アクティブにする
+        for (int i = 0; i < getChoiceCanvas.Length; i++)
         {
-            setCanvasPositionInitialValue[i] = setAllCanvas()[i].transform.localPosition;
+            getChoiceCanvas[i].SetActive(false);
         }
+        for (int i = 0; i < getCanvas.Length; i++)
+        {
+            getCanvas[i].SetActive(false);
+        }
+
+        cBack.Add(k);
+        CanvasTorpidity = getCanvas[0];
+        timeDisplay = spawnEvent[y];
         //  選択画面を何回連続で表示するか、値を習得
         BeforeLenth = choiceLength[j];
 
+
+        //  画面初期化処理
         setBookprocessing();
         characterAnimation();
 
-        textSave(System.DateTime.Now.ToString());
+
+        //  現在の日付、時刻を LogData に書き出し
+        textSave(System.DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss"));
 
     }
 
@@ -266,6 +294,8 @@ private int[] moveTransition;
     }
 
 
+    #region Spawn
+
     /**
      *  <summary>
      *  TransitionSpawnPoint の EventNo. の値が
@@ -277,16 +307,6 @@ private int[] moveTransition;
     {
 		if (scenarioNum == spawnEvent[y])
         {
-            /*
-            if(aActive[y] == false)
-            {
-                gArrow.SetActive(false);
-            }
-            else
-            {
-                gArrow.SetActive(true);
-            }
-            */
             setAllCanvas()[nowC].transform.localPosition = spawnPointVector3[y];
             y++;
 			spawnEventActive = true;
@@ -294,7 +314,7 @@ private int[] moveTransition;
         }
         else if(spawnEventActive == false)
         {
-            setAllCanvas()[nowC].transform.localPosition = setCanvasPositionInitialValue[nowC];
+            setAllCanvas()[nowC].transform.localPosition = setCanvasInitialPositionValue[nowC];
         }
 
         if (spawnEventActive == true)
@@ -310,6 +330,10 @@ private int[] moveTransition;
         }
     }
 
+    #endregion
+
+
+    #region Main_setBook
 
     /**
      *  <summary>
@@ -352,6 +376,10 @@ private int[] moveTransition;
 
     }
 
+    #endregion
+
+
+    #region Main_Choice
 
     /**
      *  <summary>
@@ -372,87 +400,25 @@ private int[] moveTransition;
             getChoiceCanvas[canvasNum1[beforeswitch]].SetActive(false);
             getChoiceCanvas[canvasNum2[beforeswitch]].SetActive(false);
 
-            //  tBookの処理
-            setBookprocessing();
-
-            BeforeLenth += choiceLength[j];
-        }
-        
-        #region iranai
-        /*
-        switch (choiceswitch) {
-            case 0:
-                choiceCanvasControll();
-                break;
-            case 1:
-                choiceCanvasControll();
-                break;
-            case 2:
-                choiceCanvasControll();
-                break;
-            case 3:
-                choiceCanvasControll();
-                break;
-            case 4:
-                choiceCanvasControll();
-                break;
-            case 999:
-                //  tChoiceの終了処理
-                textControllerPlace.SetActive(true);
-                getChoiceCanvas[canvasNum1[k - 1]].SetActive(false);
-                getChoiceCanvas[canvasNum2[k - 1]].SetActive(false);
-
-                //  tBookの処理
-                setBookprocessing();
-
-                BeforeLenth += choiceLength[j];
-                break;
-                
-        }
-        */
-        /*
-        //  チョイスセレクトがオンのときの処理
-        if (k < BeforeLenth)
-        {
-            // クリックしてもキャンバスの文字送りが行われないようにする。
-            textControllerPlace.SetActive(false);
-            //  tChoiceの処理
-			if (k != 0) {
-				getChoiceCanvas [canvasNum1 [k - 1]].SetActive (false);
-				getChoiceCanvas [canvasNum2 [k - 1]].SetActive (false);
-			}
-            getChoiceText[canvasNum1[k]].fontSize = fontSize1[k];
-            getChoiceText[canvasNum2[k]].fontSize = fontSize2[k];
-            getChoiceCanvas[canvasNum1[k]].SetActive(true);
-            getChoiceCanvas[canvasNum2[k]].SetActive(true);
-            nowC = canvasNum1[k] + getCanvas.Length;
-            getChoiceText[canvasNum1[k]].text = choiceText[cNo[k]];
-            getChoiceText[canvasNum2[k]].text = choiceText[cNo[k]];
-            //  moveChoiceNoSelectが2なら、キャンバスと選択肢を同時に表示する
-            if (moveChoiceNoSelect[j] != 2)
+            for(int i = 0; i < cBackSize.Count; i++)
             {
-                getCanvas[moveCanvas[j]].SetActive(false);
-                CanvasTorpidity.SetActive(false);
+                textSave("Fontsize : " + cBackSize[i]);
+                Debug.Log("Fontsize : " + cBackSize[i]);
             }
-        }
-        else
-        {
-            //  tChoiceの終了処理
-            textControllerPlace.SetActive(true);
-            getChoiceCanvas[canvasNum1[k - 1]].SetActive(false);
-            getChoiceCanvas[canvasNum2[k - 1]].SetActive(false);
 
             //  tBookの処理
             setBookprocessing();
 
             BeforeLenth += choiceLength[j];
         }
-        // */
-
-        #endregion
     }
 
 
+    /**
+     * <summary>
+     * choiceCanvas の中央制御部
+     * </summary>
+     */
     public void choiceCanvasControll() {
         // クリックしてもキャンバスの文字送りが行われないようにする。
         textControllerPlace.SetActive(false);
@@ -475,8 +441,22 @@ private int[] moveTransition;
             getCanvas[moveCanvas[j]].SetActive(false);
             CanvasTorpidity.SetActive(false);
         }
+
+        if (cBack.Count != 1)
+        {
+            if (Input.GetMouseButtonDown(1))
+            {
+                k = cBack[cBack.Count - 2];
+                cBack.RemoveAt(cBack.Count - 1);
+                cBackSize.RemoveAt(cBack.Count - 1);
+            }
+        }
     }
 
+    #endregion
+
+
+    #region GuiArrow
 
     /**
      *  <summary>
@@ -494,7 +474,7 @@ private int[] moveTransition;
                 // 画面外にキャンパスが出ると、テキストが進まなくなる
                 if (getCanvas[i].activeInHierarchy)
                 {
-                    if (canvasAcrive[i]._isRendered)
+                    if (canvasActive[i]._isRendered)
                     {
                         textControllerPlace.SetActive(true);
                     }
@@ -507,6 +487,10 @@ private int[] moveTransition;
         }
     }
 
+    #endregion
+
+
+    #region Animation
 
     /**
      *  <summary>
@@ -534,6 +518,8 @@ private int[] moveTransition;
 
         }
     }
+
+    #endregion
 
 
     #region GetTransition
@@ -655,10 +641,10 @@ private int[] moveTransition;
         sysArray.Resize(ref cNo, tcLen);
         sysArray.Resize(ref canvasNum1, tcLen);
         sysArray.Resize(ref fontSize1, tcLen);
-        sysArray.Resize(ref nextNo1, tcLen);
+        sysArray.Resize(ref NextNo1, tcLen);
         sysArray.Resize(ref canvasNum2, tcLen);
         sysArray.Resize(ref fontSize2, tcLen);
-        sysArray.Resize(ref nextNo2, tcLen);
+        sysArray.Resize(ref NextNo2, tcLen);
 
         for (int i = 0; i < tcLen; i++)
         {
@@ -744,7 +730,7 @@ private int[] moveTransition;
 
         sysArray.Resize(ref spawnEvent, spLen + 1);
         sysArray.Resize(ref spawnPointVector3, spLen);
-        sysArray.Resize(ref aActive, spLen);
+        sysArray.Resize(ref AActive, spLen);
 
         for (int i = 0; i < spLen; i++)
         {
@@ -763,25 +749,28 @@ private int[] moveTransition;
      */
      /*
     public void setSpawnChoicePoint()
-	{
-		tSpawnChoicePoint = transitionPlace.GetComponent<TransitionSpawnChoicePoint>();
+    {
+        tSpawnChoicePoint = transitionPlace.GetComponent<TransitionSpawnChoicePoint>();
 
-		var spChoiceLen = tSpawnChoicePoint.spawnChoicePointData.Length;
+        var spChoiceLen = tSpawnChoicePoint.spawnChoicePointData.Length;
 
-		sysArray.Resize(ref spawnChoicePointEvent, spChoiceLen);
-		sysArray.Resize(ref spawnChoicePointVector3, spChoiceLen);
+        sysArray.Resize(ref spawnChoicePointEvent, spChoiceLen);
+        sysArray.Resize(ref spawnChoicePointVector3, spChoiceLen);
 
-		for (int i = 0; i < spChoiceLen; i++)
-		{
-			tSpawnChoicePoint.spawnChoicePointData[i].dataLength = i;
-			spawnChoicePointEvent[i] = tSpawnChoicePoint.spawnChoicePointData[i].eventNum;
-			spawnChoicePointVector3[i] = tSpawnChoicePoint.spawnChoicePointData[i].spawnChoicePoint;
-		}
-	}
+        for (int i = 0; i < spChoiceLen; i++)
+        {
+            tSpawnChoicePoint.spawnChoicePointData[i].dataLength = i;
+            spawnChoicePointEvent[i] = tSpawnChoicePoint.spawnChoicePointData[i].eventNum;
+            spawnChoicePointVector3[i] = tSpawnChoicePoint.spawnChoicePointData[i].spawnChoicePoint;
+        }
+    }
     */
+
     #endregion
-
-
+    
+    
+    #region Transition 以外の配列処理
+    
     /**
      *  <summary>
      *  読み取り専用オブジェクトallcanvasを作成
@@ -828,19 +817,71 @@ private int[] moveTransition;
         var sacLen = setAllCanvas().Length;
 
         //配列の初期化処理
-        sysArray.Resize(ref canvasAcrive, sacLen);
+        sysArray.Resize(ref CanvasActive, sacLen);
 
         for (int i = 0; i < sacLen; i++)
         {
-            canvasAcrive[i] = setAllCanvas()[i].GetComponent<GUIArrowActive>();
+            canvasActive[i] = setAllCanvas()[i].GetComponent<GUIArrowActive>();
         }
     }
 
+
+    /**
+     * <summary>
+     * キャンバスの初期位置を習得
+     * </summary>
+     */
+    public void setCanvasInitialPosition()
+    {
+        sysArray.Resize(ref setCanvasInitialPositionValue, setAllCanvas().Length);
+        for (int i = 0; i < setAllCanvas().Length; i++)
+        {
+            setCanvasInitialPositionValue[i] = setAllCanvas()[i].transform.localPosition;
+        }
+    }
+
+
+    #endregion
+
+
+    #region ログをファイルに書き出す処理
+
+    /**
+     *  <summary>
+     *  LogFileを書き出す
+     *  </summary> 
+     *  
+     *  <param name="txt">
+     *  LogDataとして書き出したい内容を入力する
+     *  </param>
+     */
     public void textSave(string txt)
     {
-        StreamWriter sw = new StreamWriter("LogData.txt", true); //true=追記 false=上書き
+        var sysNow = System.DateTime.Now;
+        SafeCreateDirectory("LogData");
+        StreamWriter sw = new StreamWriter("LogData/" + sysNow.ToString("yyyy_MM_dd") + ".txt", true); //true=追記 false=上書き
         sw.WriteLine(txt);
         sw.Flush();
         sw.Close();
     }
+
+
+    /** <summary>
+     *  指定したパスにディレクトリが存在しない場合
+     *  すべてのディレクトリとサブディレクトリを作成します
+     *  </summary>
+     *  
+     *  <param name="path">
+     *  存在するか確認したいフォルダ名を入力する
+     *  </param>
+     */
+    public static DirectoryInfo SafeCreateDirectory(string path)
+    {
+        if (Directory.Exists(path))
+        {
+            return null;
+        }
+        return Directory.CreateDirectory(path);
+    }
+    #endregion
 }

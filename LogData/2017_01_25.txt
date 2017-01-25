@@ -1,0 +1,39 @@
+2017/01/25 02:32:49
+2017/01/25 03:37:57
+2017/01/25 03:52:43
+Fontsize : 55
+Fontsize : 65
+Fontsize : 70
+Fontsize : 75
+Fontsize : 80
+Fontsize : 82
+Fontsize : 83
+Fontsize : 84
+Fontsize : 85
+Time : 1.000576
+Time : 0.01056326
+Time : 0.01063767
+2017/01/25 03:54:16
+Fontsize : 25
+Fontsize : 15
+Fontsize : 10
+Fontsize : 5
+Fontsize : 3
+Fontsize : 3
+Fontsize : 2
+Fontsize : 1
+Time : 2.76047
+Time : 0.01063318
+2017/01/25 03:55:05
+2017/01/25 06:45:59
+Fontsize : 55
+Fontsize : 65
+Fontsize : 70
+Fontsize : 75
+Fontsize : 80
+Fontsize : 82
+Fontsize : 83
+Fontsize : 84
+Fontsize : 85
+Time : 3.113096
+Time : 0.01096835

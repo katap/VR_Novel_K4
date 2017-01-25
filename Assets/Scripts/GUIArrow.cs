@@ -4,12 +4,9 @@ using System.Collections;
 
 public class GUIArrow : MonoBehaviour {
 
-    [SerializeField]
-    Transform target;
-    [SerializeField]
-    Camera targetCamera;
-    [SerializeField]
-    Image icon;
+    public Transform target;
+    public Camera targetCamera;
+    public Image icon;
 
     private Rect rect = new Rect(0, 0, 1, 1);
 
