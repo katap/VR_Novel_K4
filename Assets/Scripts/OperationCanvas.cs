@@ -9,7 +9,7 @@ public class OperationCanvas : MonoBehaviour {
         rotateCamera = Camera.main;
 	}
 	void Update () {
-        var rcam = rotateCamera.transform.localEulerAngles * 2;
+        var rcam = rotateCamera.transform.localEulerAngles;
         //transform.rotation = rotateCamera.transform.rotation;
         transform.rotation = Quaternion.Euler(0f, rcam.y - 180, 0f);
     }

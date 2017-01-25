@@ -34,15 +34,24 @@ public class CentralController : MonoBehaviour
     [Tooltip("アニメーションさせたい Character を入れてください。")]
     public GameObject[] Character;
 
+    [Tooltip("")]
+    public GameObject[] controllerPlace;
+
+    [Tooltip("")]
+    public GameObject fontSizeCanvas;
+
+    [Tooltip("")]
+    public Text fontSizeText;
+
     #endregion
 
 
     #region GetTransition
 
     //  TransitionBook習得用関数群
-    private int[] moveTransition;
+    public int[] moveTransition;
     private int[] moveCanvas;
-    private int[] moveChoiceNoSelect;
+    public int[] moveChoiceNoSelect;
     private int[] choiceLength;
     private int[] fontSise;
     private bool[] noDelay;
@@ -113,8 +122,12 @@ public class CentralController : MonoBehaviour
     TransitionChoiceText tChoiceText;
     TransitionSpawnPoint tSpawnPoint;
     //TransitionSpawnChoicePoint tSpawnChoicePoint;
-    TextController TController;
+    public TextController TController { get; set; }
     TransitionAnimBook aBook;
+    SteamVR_ControllerManager sCMan;
+    SteamVR_ControllerManager sCMan2;
+    SteamVR_TrackedObject trackedObj;
+    SteamVR_TrackedObject trackedObj2;
 
     private GUIArrowActive[] CanvasActive;
     public GUIArrowActive[] canvasActive{
@@ -130,12 +143,12 @@ public class CentralController : MonoBehaviour
     #region BasicFunction
 
     //  現在の TransitionBook の行数
-    private int j = 0;
+    public int j { get; set; }
 
     //  現在の TransitionChoice の行数
     //  CircleCursole 内でプラス処理を行う
     [System.NonSerialized]
-    public int k = 0;
+    public int k;
 
     //  TransitionChoice の Back 処理
     [System.NonSerialized]
@@ -149,7 +162,7 @@ public class CentralController : MonoBehaviour
     private int BeforeLenth;
 
     //  現在のシナリオ行数
-    private int scenarioNum;
+    public int scenarioNum { get; set; }
 
     //  一つ前に実行されていたキャンバスを入力する
     private GameObject CanvasTorpidity;
@@ -173,7 +186,7 @@ public class CentralController : MonoBehaviour
 
     //  spawnEventActive を、scenarioNum の値が変化するごとに１回だけ false にする関数に使用する
     //  この関数はmoveObjectが呼び出される前に記述する
-    private int count;
+    public int count { get; set; }
 
     //  キャンパスが移動してからキャンパスを発見するまでの時間を保存
     private float timeCount;
@@ -272,9 +285,13 @@ public class CentralController : MonoBehaviour
 				setBookprocessing ();
 
 			} else {
-				//  tChoiceの処理
-				choiceNoSelectController ();
+                //  tChoiceの処理
+                //choiceNoSelectController ();
+                textControllerPlace.SetActive(false);
+                fontSizeCanvas.SetActive(true);
 
+                getCanvas[moveCanvas[j]].SetActive(false);
+                CanvasTorpidity.SetActive(false);
             }
         }
 
@@ -386,39 +403,46 @@ public class CentralController : MonoBehaviour
      *  moveChoiceNoSelect が 0 ではなかったときの操作
      *  </summary>
      */
+     /*
     public void choiceNoSelectController()
-    {
-        
+    {        
         if (choiceswitch != 999)
         {
             choiceCanvasControll();
+            mouseclick();
         }
         else
         {
-            //  tChoiceの終了処理
-            textControllerPlace.SetActive(true);
-            getChoiceCanvas[canvasNum1[beforeswitch]].SetActive(false);
-            getChoiceCanvas[canvasNum2[beforeswitch]].SetActive(false);
-
-            for(int i = 0; i < cBackSize.Count; i++)
-            {
-                textSave("Fontsize : " + cBackSize[i]);
-                Debug.Log("Fontsize : " + cBackSize[i]);
-            }
-
-            //  tBookの処理
-            setBookprocessing();
-
-            BeforeLenth += choiceLength[j];
+            choiceCanvasFinish();
         }
     }
 
+    public void choiceCanvasFinish()
+    {
+        //  tChoiceの終了処理
+        textControllerPlace.SetActive(true);
+        getChoiceCanvas[canvasNum1[beforeswitch]].SetActive(false);
+        getChoiceCanvas[canvasNum2[beforeswitch]].SetActive(false);
+
+        for (int i = 0; i < cBackSize.Count; i++)
+        {
+            textSave("Fontsize : " + cBackSize[i]);
+            Debug.Log("Fontsize : " + cBackSize[i]);
+        }
+
+        //  tBookの処理
+        setBookprocessing();
+
+        BeforeLenth += choiceLength[j];
+    }
+    */
 
     /**
      * <summary>
      * choiceCanvas の中央制御部
      * </summary>
      */
+     /*
     public void choiceCanvasControll() {
         // クリックしてもキャンバスの文字送りが行われないようにする。
         textControllerPlace.SetActive(false);
@@ -442,6 +466,10 @@ public class CentralController : MonoBehaviour
             CanvasTorpidity.SetActive(false);
         }
 
+    }
+
+    public void mouseclick()
+    {
         if (cBack.Count != 1)
         {
             if (Input.GetMouseButtonDown(1))
@@ -452,7 +480,7 @@ public class CentralController : MonoBehaviour
             }
         }
     }
-
+    */
     #endregion
 
 
