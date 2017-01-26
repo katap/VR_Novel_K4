@@ -3,18 +3,13 @@ using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 using sysArray = System.Array;
-using System.IO;
 
 [RequireComponent(typeof(CentralController))]
 public class ChoiceController : MonoBehaviour
 {
     #region inspecter
 
-    [Tooltip("ON, OFF 制御したい選択肢の Canvas を入れてください。尚、Element に入れるオブジェクトは GetChoiceText と対応させてください。")]
-    public GameObject[] getChoiceCanvas;
-
-    [Tooltip("テキストを変えたい選択肢の Text を入れてください。")]
-    public Text[] getChoiceText;
+    
 
     CentralController cCon;
     TransitionChoiceText tChoiceText;
@@ -86,9 +81,9 @@ public class ChoiceController : MonoBehaviour
         settChoice();
         // アクティブなキャンバスを非アクティブにする
 
-        for (int i = 0; i < getChoiceCanvas.Length; i++)
+        for (int i = 0; i < cCon.getChoiceCanvas.Length; i++)
         {
-            getChoiceCanvas[i].SetActive(false);
+            cCon.getChoiceCanvas[i].SetActive(false);
         }
 
         //  選択画面を何回連続で表示するかの値を習得
@@ -129,8 +124,8 @@ public class ChoiceController : MonoBehaviour
     public void choiceCanvasFinish()
     {
         cCon.textControllerPlace.SetActive(true);
-        getChoiceCanvas[canvasNum1[beforeswitch]].SetActive(false);
-        getChoiceCanvas[canvasNum2[beforeswitch]].SetActive(false);
+        cCon.getChoiceCanvas[canvasNum1[beforeswitch]].SetActive(false);
+        cCon.getChoiceCanvas[canvasNum2[beforeswitch]].SetActive(false);
 
         for (int i = 0; i < cBackSize.Count; i++)
         {
@@ -157,16 +152,16 @@ public class ChoiceController : MonoBehaviour
         //  tChoiceの処理
         if (k != 0)
         {
-            getChoiceCanvas[canvasNum1[k - 1]].SetActive(false);
-            getChoiceCanvas[canvasNum2[k - 1]].SetActive(false);
+            cCon.getChoiceCanvas[canvasNum1[k - 1]].SetActive(false);
+            cCon.getChoiceCanvas[canvasNum2[k - 1]].SetActive(false);
         }
-        getChoiceText[canvasNum1[k]].fontSize = fontSize1[k];
-        getChoiceText[canvasNum2[k]].fontSize = fontSize2[k];
-        getChoiceCanvas[canvasNum1[k]].SetActive(true);
-        getChoiceCanvas[canvasNum2[k]].SetActive(true);
-        //cCon.nowC = canvasNum1[k] + 1 + cCon.getCanvas.Length;
-        getChoiceText[canvasNum1[k]].text = choiceText[cNo[k]];
-        getChoiceText[canvasNum2[k]].text = choiceText[cNo[k]];
+        cCon.getChoiceText[canvasNum1[k]].fontSize = fontSize1[k];
+        cCon.getChoiceText[canvasNum2[k]].fontSize = fontSize2[k];
+        cCon.getChoiceCanvas[canvasNum1[k]].SetActive(true);
+        cCon.getChoiceCanvas[canvasNum2[k]].SetActive(true);
+        cCon.nowC = canvasNum1[k] + 1 + cCon.getCanvas.Length;
+        cCon.getChoiceText[canvasNum1[k]].text = choiceText[cNo[k]];
+        cCon.getChoiceText[canvasNum2[k]].text = choiceText[cNo[k]];
         //  moveChoiceNoSelectが2なら、キャンバスと選択肢を同時に表示する
         if (cCon.moveChoiceNoSelect[cCon.j] != 2)
         {

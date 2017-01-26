@@ -36,21 +36,31 @@ public class CircleCursole : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+        startMove();
+    }
+
+    // Update is called once per frame
+    void Update () {
+        mainMove();
+    }
+
+    /**
+     * <summary>
+     * Start の処理
+     * </summary>
+     */
+    public void startMove()
+    {
+        animCom = centralControllerPlace.GetComponent<CentralController>();
+        choiceCon = centralControllerPlace.GetComponent<ChoiceController>();
+        cGroup = menuUI.GetComponent<CanvasGroup>();
 
         renameArrayImage();
 
         image.fillAmount = 0;
         menuUI.SetActive(false);
-        cGroup = menuUI.GetComponent<CanvasGroup>();
         cGroup.alpha = 0;
         one = false;
-        animCom = centralControllerPlace.GetComponent<CentralController>();
-        choiceCon = centralControllerPlace.GetComponent<ChoiceController>();
-    }
-
-    // Update is called once per frame
-    void Update () {
-        CCController();
     }
 
     /**
@@ -58,7 +68,7 @@ public class CircleCursole : MonoBehaviour {
      *  メイン処理部分
      *  </summary>
      */
-     public void CCController()
+    public void mainMove()
     {
 
         var frontPosition = playerpos.transform.position + playerpos.transform.forward * 3.0f;
@@ -108,8 +118,8 @@ public class CircleCursole : MonoBehaviour {
         }
         else
         {
-            image.fillAmount -= 0.01f;
-            backImage.fillAmount -= 0.01f;
+            image.fillAmount -= 0.0f;
+            backImage.fillAmount -= 0.0f;
             ChoiceImage.fillAmount = 0.0f;
         }
     }
@@ -131,6 +141,36 @@ public class CircleCursole : MonoBehaviour {
 
         amountImage("Choice", ChoiceImage);
     }
+
+
+    /**
+     *  <summary>
+     *      画像の中心を起点に、360度になるまで少しづつ表示させる
+     *  </summary>
+     * 
+     *  <param name = "str">
+     *  タグの名前を入力します
+     *  </param>
+     *  
+     *  <param name = "img">
+     *  表示させる画像の場所を指定します(重複不可)
+     *  </param>
+     * 
+     */
+    public void amountImage(string str, Image img)
+    {
+        if (hit.transform.gameObject.tag == str)
+        {
+            img.fillAmount += 0.01f;
+        }
+        else
+        {
+            img.fillAmount = 0.0f;
+        }
+    }
+
+
+    #region Buttonタグ
 
     /**
      * <summary>
@@ -162,6 +202,11 @@ public class CircleCursole : MonoBehaviour {
         }
     }
 
+    #endregion
+
+
+    #region Backタグ
+
     /**
      * <summary>
      *      Backタグが付いたオブジェクトをしばらく見た後の操作
@@ -190,6 +235,11 @@ public class CircleCursole : MonoBehaviour {
             menuUI.SetActive(false);
         }
     }
+
+    #endregion
+
+
+    #region Choiceタグ
 
     /**
      * <summary>
@@ -244,29 +294,5 @@ public class CircleCursole : MonoBehaviour {
         }
     }
 
-    /**
-     *  <summary>
-     *      画像の中心を起点に、360度になるまで少しづつ表示させる
-     *  </summary>
-     * 
-     *  <param name = "str">
-     *  タグの名前を入力します
-     *  </param>
-     *  
-     *  <param name = "img">
-     *  表示させる画像の場所を指定します(重複不可)
-     *  </param>
-     * 
-     */
-    public void amountImage( string str, Image img )
-    {
-        if (hit.transform.gameObject.tag == str )
-        {
-            img.fillAmount += 0.01f;
-        }
-        else
-        {
-            img.fillAmount = 0.0f;
-        }
-    }
+    #endregion
 }

@@ -25,6 +25,12 @@ public class CentralController : MonoBehaviour
     [Tooltip("会話文を表示したいテキストフィールドを入れてください。")]
     public Text[] getText;
 
+    [Tooltip("ON, OFF 制御したい選択肢の Canvas を入れてください。尚、Element に入れるオブジェクトは GetChoiceText と対応させてください。")]
+    public GameObject[] getChoiceCanvas;
+
+    [Tooltip("テキストを変えたい選択肢の Text を入れてください。")]
+    public Text[] getChoiceText;
+
     [Tooltip("アニメーションさせたい Character を入れてください。")]
     public GameObject[] Character;
 
@@ -617,8 +623,8 @@ public class CentralController : MonoBehaviour
         //配列の初期化処理
 
         var gcLen = getCanvas.Length;
-        var gccLen = 0; 
-        //var gccLen = ChoiceCon.getChoiceCanvas.Length;
+        //var gccLen = 0; 
+        var gccLen = getChoiceCanvas.Length;
 
         sysArray.Resize(ref allCanvas, gcLen + 1 + gccLen);
 
@@ -634,7 +640,7 @@ public class CentralController : MonoBehaviour
             }
             else
             {
-                allCanvas[i] = ChoiceCon.getChoiceCanvas[i - gcLen + 1];
+                allCanvas[i] = getChoiceCanvas[i - gcLen - 1];
             }
         }
         return (allCanvas);
