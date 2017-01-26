@@ -135,6 +135,8 @@ public class CentralController : MonoBehaviour
     //  CanvasPosition の初期値を入力する
     private Vector3[] setCanvasInitialPositionValue;
 
+    private bool finish;
+
     #endregion
 
 
@@ -268,6 +270,13 @@ public class CentralController : MonoBehaviour
         characterAnimation();
 
         investigateFontSize();
+
+        if (sMan.m_currentLine == sMan.m_scenarios.Length && finish == false)
+        {
+            Debug.Log("ok");
+            textSave("Finish");
+            finish = true;
+        }
     }
 
     #endregion
