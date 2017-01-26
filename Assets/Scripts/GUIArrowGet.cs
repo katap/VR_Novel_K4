@@ -46,7 +46,7 @@ public class GUIArrowGet : MonoBehaviour
 
     private void iconEnable()
     {
-        var viewport = targetCamera.WorldToViewportPoint(animCom.setAllCanvas()[animCom.nowC].transform.position);
+        //var viewport = targetCamera.WorldToViewportPoint(animCom.setAllCanvas()[animCom.nowC].transform.position);
         if (animCom.canvasActive[animCom.nowC]._isRendered)
         {
             //Debug.Log("カメラに映ってるよ！");

@@ -22,25 +22,16 @@ public class CentralController : MonoBehaviour
     [Tooltip("表示したいテキストフィールドがあるキャンバスを入れてください。 GuiArrowActive を アタッチする必要があります。")]
     public GameObject[] getCanvas;
 
-    [Tooltip("会話文を表示したいテキストフィールドを入力してください。")]
+    [Tooltip("会話文を表示したいテキストフィールドを入れてください。")]
     public Text[] getText;
-
-    [Tooltip("ON, OFF 制御したい選択肢の Canvas を入れてください。尚、Element に入れるオブジェクトは GetChoiceText と対応させてください。")]
-    public GameObject[] getChoiceCanvas;
-
-    [Tooltip("テキストを変えたい選択肢の Text を入れてください。")]
-    public Text[] getChoiceText;
 
     [Tooltip("アニメーションさせたい Character を入れてください。")]
     public GameObject[] Character;
 
-    [Tooltip("")]
-    public GameObject[] controllerPlace;
-
-    [Tooltip("")]
+    [Tooltip("FontSize 調査用の Canvas を入れてください。")]
     public GameObject fontSizeCanvas;
 
-    [Tooltip("")]
+    [Tooltip("FontSize 調査用の Text を入れてください。")]
     public Text fontSizeText;
 
     #endregion
@@ -49,35 +40,32 @@ public class CentralController : MonoBehaviour
     #region GetTransition
 
     //  TransitionBook習得用関数群
-    public int[] moveTransition;
-    private int[] moveCanvas;
-    public int[] moveChoiceNoSelect;
-    private int[] choiceLength;
+    private int[] MoveTransition;
+    public int[] moveTransition
+    {
+        get { return MoveTransition; }
+        private set { MoveTransition = value; }
+    }
+    private int[] MoveCanvas;
+    public int[] moveCanvas
+    {
+        get { return MoveCanvas; }
+        set { MoveCanvas = value; }
+    }
+    private int[] MoveChoiceNoSelect;
+    public int[] moveChoiceNoSelect
+    {
+        get { return MoveChoiceNoSelect; }
+        set { MoveChoiceNoSelect = value; }
+    }
+    private int[] ChoiceLength;
+    public int[] choiceLength
+    {
+        get { return ChoiceLength; }
+        set { ChoiceLength = value; }
+    }
     private int[] fontSise;
     private bool[] noDelay;
-
-    //  TransitionChoice習得用関数群
-    private int[] cNo;
-    private int[] canvasNum1;
-    private int[] fontSize1;
-
-    private int[] NextNo1;
-    public int[] nextNo1{
-        get { return NextNo1; }
-        private set { NextNo1 = value; }
-    }
-
-    private int[] canvasNum2;
-    private int[] fontSize2;
-
-    private int[] NextNo2;
-    public int[] nextNo2{
-        get { return NextNo2; }
-        private set { NextNo2 = value; }
-    }
-
-    //  TransitionChoiceText習得用関群
-    private string[] choiceText;
 
     //  TransitionAnimBook習得用関数群
     private int[] aniNo;
@@ -100,34 +88,17 @@ public class CentralController : MonoBehaviour
         set { AActive = value; }
     }
 
-    [System.NonSerialized]
-    public int choiceswitch;
-    [System.NonSerialized]
-    public int beforeswitch;
-
-	//  TransitionSpawnChoicePoint習得用関数群
-    /*
-	private int[] spawnChoicePointEvent;
-    private Vector3[] spawnChoicePointVector3;
-    */
-
-
     #endregion
 
 
     #region ReadSqript
     //  Script読み込み
     TransitionBook tBook;
-    TransitionChoice tChoice;
-    TransitionChoiceText tChoiceText;
     TransitionSpawnPoint tSpawnPoint;
-    //TransitionSpawnChoicePoint tSpawnChoicePoint;
-    public TextController TController { get; set; }
     TransitionAnimBook aBook;
-    SteamVR_ControllerManager sCMan;
-    SteamVR_ControllerManager sCMan2;
-    SteamVR_TrackedObject trackedObj;
-    SteamVR_TrackedObject trackedObj2;
+    ChoiceController ChoiceCon;
+    public TextController TController { get; set; }
+    public ScenarioManager sMan { get; set; }
 
     private GUIArrowActive[] CanvasActive;
     public GUIArrowActive[] canvasActive{
@@ -135,7 +106,6 @@ public class CentralController : MonoBehaviour
         set { CanvasActive = value; }
     }
 
-    public ScenarioManager sMan{ get; set; }
 
     #endregion
 
@@ -145,30 +115,16 @@ public class CentralController : MonoBehaviour
     //  現在の TransitionBook の行数
     public int j { get; set; }
 
-    //  現在の TransitionChoice の行数
-    //  CircleCursole 内でプラス処理を行う
-    [System.NonSerialized]
-    public int k;
-
-    //  TransitionChoice の Back 処理
-    [System.NonSerialized]
-    public List<int> cBack = new List<int>();
-    //  TransitionChoice が有効になっている際に、Back処理が行われても
-    //  最終的に辿ってきた FontSize の正常な値を返すために一時保存するための関数
-    [System.NonSerialized]
-    public List<int> cBackSize = new List<int>();
-
-    //  transitionChoiceが何行実行されるかを管理する。
-    private int BeforeLenth;
-
     //  現在のシナリオ行数
     public int scenarioNum { get; set; }
 
     //  一つ前に実行されていたキャンバスを入力する
-    private GameObject CanvasTorpidity;
+    [System.NonSerialized]
+    public GameObject CanvasTorpidity;
 
     //  現在表示されているキャンバス
-    public int nowC { get; set; }
+    [System.NonSerialized]
+    public int nowC;
 
     //  CanvasPosition の初期値を入力する
     private Vector3[] setCanvasInitialPositionValue;
@@ -197,6 +153,8 @@ public class CentralController : MonoBehaviour
     #endregion
 
 
+    #region unityMainFunction
+
     ///  <summary>
     /// Use this for initialization
     /// </summary>
@@ -211,9 +169,13 @@ public class CentralController : MonoBehaviour
     ///  </summary>
     void Update()
     {
-        scenarioController();
+        mainMove();
     }
 
+    #endregion
+
+
+    #region startMove
 
     /**
      *  <summary>
@@ -222,93 +184,134 @@ public class CentralController : MonoBehaviour
      */
     public void startMove()
     {
+        ChoiceCon = GetComponent<ChoiceController>();
+        TController = textControllerPlace.GetComponent<TextController>();
+        sMan = textControllerPlace.GetComponent<ScenarioManager>();
+
         //  配列に値を入れる処理
         settBook();
-        settChoice();
-        setTchoiceText();
         setAnimBook();
         setSpawnPoint();
-		//  setSpawnChoicePoint ();
 
         setAllCanvas();
         setGuiArrowActive();
         setCanvasInitialPosition();
 
-
-        TController = textControllerPlace.GetComponent<TextController>();
-        sMan = textControllerPlace.GetComponent<ScenarioManager>();
-
-
-        // アクティブなキャンバスを非アクティブにする
-        for (int i = 0; i < getChoiceCanvas.Length; i++)
-        {
-            getChoiceCanvas[i].SetActive(false);
-        }
         for (int i = 0; i < getCanvas.Length; i++)
         {
             getCanvas[i].SetActive(false);
         }
 
-        cBack.Add(k);
-        CanvasTorpidity = getCanvas[0];
-        timeDisplay = spawnEvent[y];
-        //  選択画面を何回連続で表示するか、値を習得
-        BeforeLenth = choiceLength[j];
+        //  ChoiceCanvas を使用したい場合はこちらを ON
+        ChoiceCon.choiceStartMove();
+        //  FontSize 調査用の Canvas を使用したい場合はこちらを ON
+        fontSizeCanvas.SetActive(false);
 
+        CanvasTorpidity = getCanvas[0];
+        timeDisplay = spawnEvent[0];
 
         //  画面初期化処理
         setBookprocessing();
         characterAnimation();
 
-
         //  現在の日付、時刻を LogData に書き出し
         textSave(System.DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss"));
-
     }
 
+    #endregion
+
+
+    #region mainMove
 
     /**
      *  <summary>
      *  メイン処理部分
      *  </summary>
      */
-    public void scenarioController()
+    public void mainMove()
     {
         //  現在のシナリオの行数を習得
         scenarioNum = TController.maneger;
 
         //  シナリオの行数が遷移No.と同じ数値になったとき
-		if (scenarioNum == moveTransition [j]) {
-			//  ChoiceSelect が 0 以外ならチョイス画面に飛ぶ
-			if (moveChoiceNoSelect [j] == 0) {
-				//  tBookの処理
-				setBookprocessing ();
-
-			} else {
-                //  tChoiceの処理
-                //choiceNoSelectController ();
+        if (scenarioNum == moveTransition[j])
+        {
+            //  ChoiceSelect が 0 以外ならチョイス画面に飛ぶ
+            if (moveChoiceNoSelect[j] == 0)
+            {
+                setBookprocessing();
+            }
+            else if (choiceLength[j] != 0)
+            {
                 textControllerPlace.SetActive(false);
                 fontSizeCanvas.SetActive(true);
 
                 getCanvas[moveCanvas[j]].SetActive(false);
                 CanvasTorpidity.SetActive(false);
             }
+            else
+            {
+                ChoiceCon.choiceNoSelectController();
+            }
         }
 
-		if (scenarioNum == count + 1) {
-			spawnEventActive = false;
-            count++;
-		}
-
-        //  オブジェクトの場所を変更する処理
         moveObject();
 
-        // GuiArrowActiveの処理
         settControllerActive();
 
-        //  アニメーションの処理
         characterAnimation();
+
+        investigateFontSize();
     }
+
+    #endregion
+
+
+    #region FontSize の調査のための処理
+
+    /**
+     * <summary>
+     * fontSizeCanvas, fontSizeText のマウス向け処理
+     * </summary>
+     */
+    public void investigateFontSize()
+    {
+        if (fontSizeCanvas.activeInHierarchy && fontSizeText.fontSize >= 1)
+        {
+            nowC = getCanvas.Length;
+            if (Input.GetMouseButton(0))
+            {
+                fontSizeText.fontSize += 1;
+            }
+
+            if (Input.GetMouseButton(1))
+            {
+                if (fontSizeText.fontSize != 1)
+                {
+                    fontSizeText.fontSize -= 1;
+                }
+            }
+
+            if (Input.GetMouseButtonUp(2))
+            {
+                endFontSizeCanvas();
+            }
+        }
+    }
+
+
+    public void endFontSizeCanvas()
+    {
+        Debug.Log(fontSizeText.fontSize);
+        textSave("FontSize : " + fontSizeText.fontSize.ToString());
+        fontSizeCanvas.SetActive(false);
+        sMan.m_textController.maneger -= 1;
+        sMan.m_currentLine -= 1;
+        sMan.RequestNextLine();
+        setBookprocessing();
+    }
+
+    #endregion
 
 
     #region Spawn
@@ -322,12 +325,11 @@ public class CentralController : MonoBehaviour
      */
     public void moveObject()
     {
-		if (scenarioNum == spawnEvent[y])
+		if (scenarioNum == spawnEvent[y] && spawnEventActive == false)
         {
             setAllCanvas()[nowC].transform.localPosition = spawnPointVector3[y];
             y++;
 			spawnEventActive = true;
-            timeCount = 0;
         }
         else if(spawnEventActive == false)
         {
@@ -339,11 +341,16 @@ public class CentralController : MonoBehaviour
             timeCount += Time.deltaTime;
         }
 
-        if(scenarioNum - 1 == timeDisplay && scenarioNum != 1)
+        if (scenarioNum - 1 == timeDisplay)
         {
-            Debug.Log("Time : " + timeCount);
-            timeDisplay = spawnEvent[y];
-            textSave("Time : " + timeCount);
+            if (spawnEventActive == true)
+            {
+                Debug.Log("Time : " + timeCount);
+                timeDisplay = spawnEvent[y];
+                textSave("Time : " + timeCount);
+                timeCount = 0;
+                spawnEventActive = false;
+            }
         }
     }
 
@@ -354,7 +361,7 @@ public class CentralController : MonoBehaviour
 
     /**
      *  <summary>
-     *  setBookに入力された処理を実行する
+     *  transitionBook に入力された処理を実行する
      *  </summary>
      */
     public void setBookprocessing()
@@ -396,100 +403,12 @@ public class CentralController : MonoBehaviour
     #endregion
 
 
-    #region Main_Choice
-
-    /**
-     *  <summary>
-     *  moveChoiceNoSelect が 0 ではなかったときの操作
-     *  </summary>
-     */
-     /*
-    public void choiceNoSelectController()
-    {        
-        if (choiceswitch != 999)
-        {
-            choiceCanvasControll();
-            mouseclick();
-        }
-        else
-        {
-            choiceCanvasFinish();
-        }
-    }
-
-    public void choiceCanvasFinish()
-    {
-        //  tChoiceの終了処理
-        textControllerPlace.SetActive(true);
-        getChoiceCanvas[canvasNum1[beforeswitch]].SetActive(false);
-        getChoiceCanvas[canvasNum2[beforeswitch]].SetActive(false);
-
-        for (int i = 0; i < cBackSize.Count; i++)
-        {
-            textSave("Fontsize : " + cBackSize[i]);
-            Debug.Log("Fontsize : " + cBackSize[i]);
-        }
-
-        //  tBookの処理
-        setBookprocessing();
-
-        BeforeLenth += choiceLength[j];
-    }
-    */
-
-    /**
-     * <summary>
-     * choiceCanvas の中央制御部
-     * </summary>
-     */
-     /*
-    public void choiceCanvasControll() {
-        // クリックしてもキャンバスの文字送りが行われないようにする。
-        textControllerPlace.SetActive(false);
-        //  tChoiceの処理
-        if (k != 0)
-        {
-            getChoiceCanvas[canvasNum1[k - 1]].SetActive(false);
-            getChoiceCanvas[canvasNum2[k - 1]].SetActive(false);
-        }
-        getChoiceText[canvasNum1[k]].fontSize = fontSize1[k];
-        getChoiceText[canvasNum2[k]].fontSize = fontSize2[k];
-        getChoiceCanvas[canvasNum1[k]].SetActive(true);
-        getChoiceCanvas[canvasNum2[k]].SetActive(true);
-        nowC = canvasNum1[k] + getCanvas.Length;
-        getChoiceText[canvasNum1[k]].text = choiceText[cNo[k]];
-        getChoiceText[canvasNum2[k]].text = choiceText[cNo[k]];
-        //  moveChoiceNoSelectが2なら、キャンバスと選択肢を同時に表示する
-        if (moveChoiceNoSelect[j] != 2)
-        {
-            getCanvas[moveCanvas[j]].SetActive(false);
-            CanvasTorpidity.SetActive(false);
-        }
-
-    }
-
-    public void mouseclick()
-    {
-        if (cBack.Count != 1)
-        {
-            if (Input.GetMouseButtonDown(1))
-            {
-                k = cBack[cBack.Count - 2];
-                cBack.RemoveAt(cBack.Count - 1);
-                cBackSize.RemoveAt(cBack.Count - 1);
-            }
-        }
-    }
-    */
-    #endregion
-
-
     #region GuiArrow
 
     /**
      *  <summary>
      *  文字を表示しているキャンバスが視界外へ行った際、
-     *  テキストを進めることが出来なくする。
+     *  テキストを進めることが出来なくする処理。
      *  </summary>
      */
     public void settControllerActive()
@@ -599,10 +518,10 @@ public class CentralController : MonoBehaviour
 
         var tdLen = tBook.data.Length + 1;
 
-        sysArray.Resize(ref moveTransition, tdLen);
-        sysArray.Resize(ref moveCanvas, tdLen);
-        sysArray.Resize(ref moveChoiceNoSelect, tdLen);
-        sysArray.Resize(ref choiceLength, tdLen);
+        sysArray.Resize(ref MoveTransition, tdLen);
+        sysArray.Resize(ref MoveCanvas, tdLen);
+        sysArray.Resize(ref MoveChoiceNoSelect, tdLen);
+        sysArray.Resize(ref ChoiceLength, tdLen);
         sysArray.Resize(ref fontSise, tdLen);
         sysArray.Resize(ref noDelay, tdLen);
 
@@ -622,94 +541,6 @@ public class CentralController : MonoBehaviour
             }
             fontSise[i] = tBook.data[i].fontSize;
             noDelay[i] = tBook.data[i].delay;
-        }
-    }
-
-
-    /**
-     *  <summary>
-     *  transitionPlace 下の TransitionChoiceの値を習得する。
-     *  </summary>
-     *  
-     *  <param name ="tChoice.choiceData[].debugNo">
-     *       現在の配列番号、tBook.data[].debugChoiceLength
-     *        と合わせて使う
-     *  </param>
-     *  
-     *  <param name ="cNO">
-     *      choiceText 内のどのテキスト文を使うか
-     *  </param>
-     *  
-     *  <param name ="canvasNum">
-     *      文字を挿入したいキャンバスその１が入った
-     *       GetCanvas の値を入力する。
-     *  </param>
-     *  
-     *  <param name ="fontSize">
-     *      キャンバスその１のフォントサイズ切り替え
-     *  </param>
-     *  
-     *  <param name ="canvasNum2">
-     *      文字を挿入したいキャンバスその２が入った
-     *       GetCanvas の値を入力する。
-     *  </param>
-     *  
-     *  <param name ="fontSize2">
-     *      キャンバスその２のフォントサイズ切り替え
-     *  </param>
-     *  
-     */
-    public void settChoice()
-    {
-        //  配列の初期化処理
-        tChoice = transitionPlace.GetComponent<TransitionChoice>();
-
-        var tcLen = tChoice.choiceData.Length;
-
-        sysArray.Resize(ref cNo, tcLen);
-        sysArray.Resize(ref canvasNum1, tcLen);
-        sysArray.Resize(ref fontSize1, tcLen);
-        sysArray.Resize(ref NextNo1, tcLen);
-        sysArray.Resize(ref canvasNum2, tcLen);
-        sysArray.Resize(ref fontSize2, tcLen);
-        sysArray.Resize(ref NextNo2, tcLen);
-
-        for (int i = 0; i < tcLen; i++)
-        {
-            tChoice.choiceData[i].debugNo = i;
-            cNo[i] = tChoice.choiceData[i].choiceNo;
-            canvasNum1[i] = tChoice.choiceData[i].canvasNum1;
-            fontSize1[i] = tChoice.choiceData[i].FontSize1;
-            nextNo1[i] = tChoice.choiceData[i].nextChoiceNo1;
-            canvasNum2[i] = tChoice.choiceData[i].canvasnum2;
-            fontSize2[i] = tChoice.choiceData[i].FontSize2;
-            nextNo2[i] = tChoice.choiceData[i].nextChoiceNo2;
-        }
-    }
-
-
-    /**
-     *  <summary>
-     *  transitionPlace 下の TransitionChoiceTextの値を習得する。
-     *  </summary>
-     *  
-     *  <param name = "choiceText">
-     *      選択肢に表示する文章を習得する
-     *  </param>
-     *  
-     */
-    public void setTchoiceText()
-    {
-        //配列の初期化処理
-        tChoiceText = transitionPlace.GetComponent<TransitionChoiceText>();
-
-        var tctLen = tChoiceText.choiceTextData.Length;
-
-        sysArray.Resize(ref choiceText, tctLen);
-
-        for (int i = 0; i < tctLen; i++)
-        {
-            choiceText[i] = tChoiceText.choiceTextData[i].choiceText;
         }
     }
 
@@ -769,31 +600,6 @@ public class CentralController : MonoBehaviour
         }
     }
 
-
-    /**
-     * <summary>
-     *  transitionPlace 下の transitionSpawnChoicePointの値を習得する。
-     * </summary>
-     */
-     /*
-    public void setSpawnChoicePoint()
-    {
-        tSpawnChoicePoint = transitionPlace.GetComponent<TransitionSpawnChoicePoint>();
-
-        var spChoiceLen = tSpawnChoicePoint.spawnChoicePointData.Length;
-
-        sysArray.Resize(ref spawnChoicePointEvent, spChoiceLen);
-        sysArray.Resize(ref spawnChoicePointVector3, spChoiceLen);
-
-        for (int i = 0; i < spChoiceLen; i++)
-        {
-            tSpawnChoicePoint.spawnChoicePointData[i].dataLength = i;
-            spawnChoicePointEvent[i] = tSpawnChoicePoint.spawnChoicePointData[i].eventNum;
-            spawnChoicePointVector3[i] = tSpawnChoicePoint.spawnChoicePointData[i].spawnChoicePoint;
-        }
-    }
-    */
-
     #endregion
     
     
@@ -802,6 +608,7 @@ public class CentralController : MonoBehaviour
     /**
      *  <summary>
      *  読み取り専用オブジェクトallcanvasを作成
+     *  全Canvas配列を格納
      *  </summary>
      */
     public GameObject[] setAllCanvas()
@@ -810,19 +617,24 @@ public class CentralController : MonoBehaviour
         //配列の初期化処理
 
         var gcLen = getCanvas.Length;
-        var gccLen = getChoiceCanvas.Length;
+        var gccLen = 0; 
+        //var gccLen = ChoiceCon.getChoiceCanvas.Length;
 
-        sysArray.Resize(ref allCanvas, gcLen + gccLen);
+        sysArray.Resize(ref allCanvas, gcLen + 1 + gccLen);
 
-        for (int i = 0; i < gcLen + gccLen; i++)
+        for (int i = 0; i < gcLen + 1 + gccLen; i++)
         {
             if (i < gcLen)
             {
                 allCanvas[i] = getCanvas[i];
             }
+            else if(i < gcLen + 1)
+            {
+                allCanvas[i] = fontSizeCanvas;
+            }
             else
             {
-                allCanvas[i] = getChoiceCanvas[i - gcLen];
+                allCanvas[i] = ChoiceCon.getChoiceCanvas[i - gcLen + 1];
             }
         }
         return (allCanvas);

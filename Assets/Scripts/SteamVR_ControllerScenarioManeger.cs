@@ -19,6 +19,8 @@ public class SteamVR_ControllerScenarioManeger : MonoBehaviour {
     {
 
         var device = SteamVR_Controller.Input((int)trackedObj.index);
+        
+        #region 一応とっておく
         /*
         if (animCom.scenarioNum == animCom.moveTransition[animCom.j])
         {
@@ -42,54 +44,19 @@ public class SteamVR_ControllerScenarioManeger : MonoBehaviour {
             }
         }
         */
+        #endregion
 
+        // fontSizeCanvasの終了処理
         if (animCom.fontSizeCanvas.activeInHierarchy && animCom.fontSizeText.fontSize >= 1)
         {
             if (device.GetPressUp(SteamVR_Controller.ButtonMask.ApplicationMenu))
             {
-                //animCom.choiceCanvasFinish();
-                Debug.Log(animCom.fontSizeText.fontSize);
-                animCom.textSave("FontSize : " + animCom.fontSizeText.fontSize.ToString());
-                animCom.fontSizeCanvas.SetActive(true);
-                animCom.fontSizeCanvas.SetActive(false);
-                animCom.sMan.m_textController.maneger -= 1;
-                animCom.sMan.m_currentLine -= 1;
-                animCom.sMan.RequestNextLine();
-                animCom.setBookprocessing();
-                //animCom.fontSizeText.fontSize += 1;
-            }
-            if (device.GetPressUp(SteamVR_Controller.ButtonMask.ApplicationMenu))
-            {
-                //animCom.fontSizeText.fontSize -= 1;
-            }
-            #region iranai
-
-            if (device.GetTouchDown(SteamVR_Controller.ButtonMask.Touchpad))
-            {
-                Vector2 touchPosition = device.GetAxis();
-                if (touchPosition.y / touchPosition.x > 1 || touchPosition.y / touchPosition.x < -1)
-                {
-                    if (touchPosition.y > 0)
-                    {
-                        if (animCom.fontSizeText.fontSize > 2)
-                        {
-                            //タッチパッド上をクリックした場合の処理
-                            animCom.fontSizeText.fontSize += 1;
-                        }
-                    }
-                    else
-                    {
-                        if (animCom.fontSizeText.fontSize != 1)
-                        {
-                            //タッチパッド下をクリックした場合の処理
-                            animCom.fontSizeText.fontSize -= 1;
-                        }
-                    }
-                }
+                animCom.endFontSizeCanvas();
             }
         }
-        #endregion
-        if (device.GetTouch(SteamVR_Controller.ButtonMask.Touchpad))
+
+        // fontSizeCanvasのフォントの大きさを変える処理
+        if (device.GetTouchDown(SteamVR_Controller.ButtonMask.Touchpad))
         {
             Vector2 touchPosition = device.GetAxis();
             if (touchPosition.y / touchPosition.x > 1 || touchPosition.y / touchPosition.x < -1)
@@ -98,6 +65,7 @@ public class SteamVR_ControllerScenarioManeger : MonoBehaviour {
                 {
                     //タッチパッド上をクリックした場合の処理
                     animCom.fontSizeText.fontSize += 1;
+                    Invoke("delayTouch", 0.5f);
                 }
                 else
                 {
@@ -105,12 +73,15 @@ public class SteamVR_ControllerScenarioManeger : MonoBehaviour {
                     {
                         //タッチパッド下をクリックした場合の処理
                         animCom.fontSizeText.fontSize -= 1;
+                        Invoke("delayTouch", 0.5f);
                     }
                 }
             }
         }
-        
 
+        
+        
+        // 文字送り
         if (animCom.textControllerPlace.activeInHierarchy || animCom.fontSizeCanvas.activeInHierarchy == false) {
             if (animCom.sMan.m_textController.IsCompleteDisplayText)
             {
@@ -136,6 +107,33 @@ public class SteamVR_ControllerScenarioManeger : MonoBehaviour {
                 if (device.GetTouchUp(SteamVR_Controller.ButtonMask.Trigger))
                 {
                     animCom.sMan.m_textController.ForceCompleteDisplayText();
+                }
+            }
+        }
+    }
+
+    void delayTouch()
+    {
+        var device = SteamVR_Controller.Input((int)trackedObj.index);
+
+        // fontSizeCanvasのフォントの大きさを変える処理
+        if (device.GetTouch(SteamVR_Controller.ButtonMask.Touchpad))
+        {
+            Vector2 touchPosition = device.GetAxis();
+            if (touchPosition.y / touchPosition.x > 1 || touchPosition.y / touchPosition.x < -1)
+            {
+                if (touchPosition.y > 0)
+                {
+                    //タッチパッド上をクリックした場合の処理
+                    animCom.fontSizeText.fontSize += 1;
+                }
+                else
+                {
+                    if (animCom.fontSizeText.fontSize != 1)
+                    {
+                        //タッチパッド下をクリックした場合の処理
+                        animCom.fontSizeText.fontSize -= 1;
+                    }
                 }
             }
         }

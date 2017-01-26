@@ -65,10 +65,13 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\AdjustHeight.cs" />
     <Compile Include="Assets\Scripts\AdjustHeightImage.cs" />
+    <Compile Include="Assets\Scripts\AdjustSize.cs" />
+    <Compile Include="Assets\Scripts\AdjustSizeImage.cs" />
     <Compile Include="Assets\Scripts\Back.cs" />
     <Compile Include="Assets\Scripts\CanvasFix.cs" />
     <Compile Include="Assets\Scripts\CanvasTransition.cs" />
     <Compile Include="Assets\Scripts\CentralController.cs" />
+    <Compile Include="Assets\Scripts\ChoiceController.cs" />
     <Compile Include="Assets\Scripts\CircleCursole.cs" />
     <Compile Include="Assets\Scripts\Clicker.cs" />
     <Compile Include="Assets\Scripts\CommandController.cs" />

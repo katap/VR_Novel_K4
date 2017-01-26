@@ -30,6 +30,7 @@ public class CircleCursole : MonoBehaviour {
     [System.NonSerialized]
     public string objectName;
     CentralController animCom;
+    ChoiceController choiceCon;
 
     RaycastHit hit;
 
@@ -44,6 +45,7 @@ public class CircleCursole : MonoBehaviour {
         cGroup.alpha = 0;
         one = false;
         animCom = centralControllerPlace.GetComponent<CentralController>();
+        choiceCon = centralControllerPlace.GetComponent<ChoiceController>();
     }
 
     // Update is called once per frame
@@ -212,28 +214,31 @@ public class CircleCursole : MonoBehaviour {
                 if (hit.collider.gameObject.name == ChoiceText[i].name)
                 {
                     objectName = hit.collider.gameObject.name;
-                    //Debug.Log(objectName + ":" + ChoiceText[i].fontSize);
-                    animCom.cBackSize.Add(ChoiceText[i].fontSize);
-                    //animCom.textSave(objectName + ":" + ChoiceText[i].fontSize);
-                    //animCom.k += 1;
+                    Debug.Log(objectName + ":" + ChoiceText[i].fontSize);
+                    choiceCon.cBackSize.Add(ChoiceText[i].fontSize);
+                    animCom.textSave(objectName + ":" + ChoiceText[i].fontSize);
+                    //choiceCon.k += 1;
                     if (objectName == "ChoiceText1")
                     {
-                        animCom.beforeswitch = animCom.choiceswitch;
-                        animCom.choiceswitch = animCom.nextNo1[animCom.k];
-                        animCom.k = animCom.nextNo1[animCom.k];
-                        animCom.cBack.Add(animCom.k);
+                        choiceCon.beforeswitch = choiceCon.choiceswitch;
+                        choiceCon.choiceswitch = choiceCon.nextNo1[choiceCon.k];
+                        choiceCon.k = choiceCon.nextNo1[choiceCon.k];
+                        choiceCon.cBack.Add(choiceCon.k);
                     }
                     else if (objectName == "ChoiceText2")
                     {
-                        animCom.beforeswitch = animCom.choiceswitch;
-                        animCom.choiceswitch = animCom.nextNo2[animCom.k];
-                        animCom.k = animCom.nextNo2[animCom.k];
-                        animCom.cBack.Add(animCom.k);
+                        choiceCon.beforeswitch = choiceCon.choiceswitch;
+                        choiceCon.choiceswitch = choiceCon.nextNo2[choiceCon.k];
+                        choiceCon.k = choiceCon.nextNo2[choiceCon.k];
+                        choiceCon.cBack.Add(choiceCon.k);
+                        
                     }
-                    foreach (int num in animCom.cBack)
+                    
+                    foreach (int num in choiceCon.cBack)
                     {
                         Debug.Log(num);
                     }
+                    
                 }
             }
         }
